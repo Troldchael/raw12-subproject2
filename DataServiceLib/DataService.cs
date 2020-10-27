@@ -21,6 +21,17 @@ namespace DataServiceLib
             new Category{ Id = 8, Name = "Seafood", Description = "Seaweed and fish"}
         };
 
+        private List<Product> _products = new List<Product>();
+
+
+        public DataService()
+        {
+            _products.Add(new Product { Id = 1, Name = "Chai", Category = GetCategory(1) });
+            _products.Add(new Product { Id = 2, Name = "Chang", Category = GetCategory(1) });
+            _products.Add(new Product { Id = 3, Name = "Aniseed Syrup", Category = GetCategory(2) });
+            _products.Add(new Product { Id = 4, Name = "Chef Anton's Cajun Seasoning", Category = GetCategory(2) });
+        }
+
 
         public IList<Category> GetCategories()
         {
@@ -30,6 +41,18 @@ namespace DataServiceLib
         public Category GetCategory(int id)
         {
             return _categories.FirstOrDefault(x => x.Id == id);
+        }
+
+
+
+        public IList<Product> GetProducts()
+        {
+            return _products;
+        }
+
+        public Product GetProduct(int id)
+        {
+            return _products.FirstOrDefault(x => x.Id == id);
         }
 
     }
