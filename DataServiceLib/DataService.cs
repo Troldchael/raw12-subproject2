@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataServiceLib
 {
-    public class DataService
+    public class DataService : IDataService
     {
         private List<Category> _categories = new List<Category>
         {
@@ -43,6 +43,24 @@ namespace DataServiceLib
             return _categories.FirstOrDefault(x => x.Id == id);
         }
 
+        public void CreateCategory(Category category)
+        {
+            var maxId = _categories.Max(x => x.Id);
+            category.Id = maxId + 1;
+            _categories.Add(category);
+        }
+
+        public bool UpdateCategory(Category category)
+        { 
+            var dbCat = GetCategory(category.Id);
+            if (dbCat == null)
+            {
+                return false;
+            }
+            dbCat.Name = category.Name;
+            dbCat.Description = category.Description;
+            return true;
+        }
 
 
         public IList<Product> GetProducts()
@@ -55,5 +73,6 @@ namespace DataServiceLib
             return _products.FirstOrDefault(x => x.Id == id);
         }
 
+       
     }
 }
