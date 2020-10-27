@@ -10,5 +10,6 @@ namespace DataServiceLib
         Product GetProduct(int id);
         void CreateCategory(Category category);
         bool UpdateCategory(Category category);
+        bool DeleteCategory(int id);
     }
 }

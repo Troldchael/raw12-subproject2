@@ -62,6 +62,17 @@ namespace DataServiceLib
             return true;
         }
 
+        public bool DeleteCategory(int id)
+        {
+            var dbCat = GetCategory(id);
+            if (dbCat == null)
+            {
+                return false;
+            }
+            _categories.Remove(dbCat);
+            return true;
+        }
+
 
         public IList<Product> GetProducts()
         {

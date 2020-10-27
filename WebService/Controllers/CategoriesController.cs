@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using DataServiceLib;
 using Microsoft.AspNetCore.Mvc;
 using WebService.Models;
@@ -14,10 +15,12 @@ namespace WebService.Controllers
     public class CategoriesController : ControllerBase
     {
         IDataService _dataService;
+        private readonly IMapper _mapper;
 
-        public CategoriesController(IDataService dataService)
+        public CategoriesController(IDataService dataService, IMapper mapper)
         {
             _dataService = dataService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -26,7 +29,7 @@ namespace WebService.Controllers
             
             var categories = _dataService.GetCategories();
 
-            return Ok(categories);
+            return Ok(_mapper.Map<IEnumerable<CategoryDto>>(categories));
         }
 
         [HttpGet("{id}")]
@@ -38,17 +41,14 @@ namespace WebService.Controllers
                 return NotFound();
             }
 
-            return Ok(category);
+            return Ok(_mapper.Map<CategoryDto>(category));
         }
 
         [HttpPost]
         public IActionResult CreateCategory(CategoryForCreationOrUpdateDto categoryOrUpdateDto)
         {
-            var category = new Category
-            {
-                Name = categoryOrUpdateDto.Name,
-                Description = categoryOrUpdateDto.Description
-            };
+            var category = _mapper.Map<Category>(categoryOrUpdateDto);
+            
             _dataService.CreateCategory(category);
 
             return Created("", category);
@@ -57,12 +57,7 @@ namespace WebService.Controllers
         [HttpPut("{id}")]
         public IActionResult UpdateCategory(int id, CategoryForCreationOrUpdateDto categoryOrUpdateDto)
         {
-            var category = new Category
-            {
-                Id = id,
-                Name = categoryOrUpdateDto.Name,
-                Description = categoryOrUpdateDto.Description
-            };
+            var category = _mapper.Map<Category>(categoryOrUpdateDto);
 
             if (!_dataService.UpdateCategory(category))
             {
@@ -76,7 +71,12 @@ namespace WebService.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteCategory(int id)
         {
+            if (!_dataService.DeleteCategory(id))
+            {
+                return NotFound();
+            }
 
+            return NoContent();
         }
     }
 }
