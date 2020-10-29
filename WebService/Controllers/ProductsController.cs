@@ -16,6 +16,7 @@ namespace WebService.Controllers
     {
         private readonly IDataService _dataService;
         private readonly IMapper _mapper;
+        private const int MaxPageSize = 25;
 
         public ProductsController(IDataService dataService, IMapper mapper)
         {
@@ -23,17 +24,19 @@ namespace WebService.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet(Name = nameof(GetProducts))]
         public IActionResult GetProducts(int page = 0, int pageSize = 10)
         {
+            pageSize = CheckPageSize(pageSize);
+
             var products = _dataService.GetProducts(page, pageSize);
 
-            var items = products.Select(CreateProductElementDto);
+            var result = CreateResult(page, pageSize, products);
 
-            
-            return Ok(items);
+            return Ok(result);
         }
 
+        
         [HttpGet("{id}", Name = nameof(GetProduct))]
         public IActionResult GetProduct(int id)
         {
@@ -57,6 +60,56 @@ namespace WebService.Controllers
             dto.Url = Url.Link(nameof(GetProduct), new {product.Id});
             return dto;
         }
+
+        /*
+         *
+         * Helpers
+         */
+
+        private int CheckPageSize(int pageSize)
+        {
+            return pageSize > MaxPageSize ? MaxPageSize : pageSize;
+        }
+
+        private (string prev, string cur, string next) CreatePagingNavigation(int page, int pageSize, int count)
+        {
+            string prev = null;
+
+            if (page > 0)
+            {
+                prev = Url.Link(nameof(GetProducts), new { page = page - 1, pageSize });
+            }
+
+            string next = null;
+
+            if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
+                next = Url.Link(nameof(GetProducts), new { page = page + 1, pageSize });
+
+            var cur = Url.Link(nameof(GetProducts), new { page, pageSize });
+
+            return (prev, cur, next);
+        }
+
+        private object CreateResult(int page, int pageSize, IList<Product> products)
+        {
+            var items = products.Select(CreateProductElementDto);
+
+            var count = _dataService.NumberOfProducts();
+
+            var navigationUrls = CreatePagingNavigation(page, pageSize, count);
+
+
+            var result = new
+            {
+                navigationUrls.prev,
+                navigationUrls.cur,
+                navigationUrls.next,
+                count,
+                items
+            };
+            return result;
+        }
+
 
     }
 }

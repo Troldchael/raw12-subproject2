@@ -84,6 +84,11 @@ namespace DataServiceLib
             return _products.FirstOrDefault(x => x.Id == id);
         }
 
+        public int NumberOfProducts()
+        {
+            return _products.Count;
+        }
+
         private void AddProducts()
         {
             _products.Add(new Product { Id = 1, Name = "Chai", Category = GetCategory(1) });
