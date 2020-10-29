@@ -32,7 +32,7 @@ namespace WebService.Controllers
             return Ok(_mapper.Map<IEnumerable<CategoryDto>>(categories));
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = nameof(GetCategory))]
         public IActionResult GetCategory(int id)
         {
             var category = _dataService.GetCategory(id);

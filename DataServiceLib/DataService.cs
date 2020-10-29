@@ -71,9 +71,12 @@ namespace DataServiceLib
         }
 
 
-        public IList<Product> GetProducts()
+        public IList<Product> GetProducts(int page, int pageSize)
         {
-            return _products;
+            return _products
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToList();
         }
 
         public Product GetProduct(int id)
