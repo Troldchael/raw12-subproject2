@@ -40,14 +40,18 @@ namespace WebService.Middleware
 
         private async Task<string> FormatRequest(HttpRequest request)
         {
-            var body = request.Body;
             request.EnableBuffering();
 
             var buffer = new byte[Convert.ToInt32(request.ContentLength)];
             await request.Body.ReadAsync(buffer, 0, buffer.Length);
             var bodyAsText = Encoding.UTF8.GetString(buffer);
 
-            request.Body = body;
+            // request.EnableBuffering(); is necessary for reading the Body stream more than once
+            // You need to move the position back to the beginning, otherwise the next pice of middleware
+            // that try to get the body will fail to do that, i.e. the position is in the end and thus the 
+            // body seems to be empty
+            
+            request.Body.Position = 0;
 
             return $"{request.Scheme} {request.Host}{request.Path} {request.QueryString} {bodyAsText}";
         }
