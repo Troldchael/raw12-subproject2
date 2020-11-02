@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataServiceLib
+namespace DataServiceLib.Framework
 {
-    public class TitleBookmarking
+    public class RatingHistory
     {
         //properties
         public int UserId { get; set; }
+        public string Rating { get; set; }
         public string TitleId { get; set; }
 
         //navigation poperties

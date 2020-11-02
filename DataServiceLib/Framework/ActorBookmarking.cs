@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataServiceLib
+namespace DataServiceLib.Framework
 {
-    public class SearchHistory
+    public class ActorBookmarking
     {
         //properties
         public int UserId { get; set; }
-        public string Timestamp { get; set; }
-        public string Keyword { get; set; }
+        public string Nconst { get; set; }
 
         //navigation poperties
         public string Type { get; set; } //dummy

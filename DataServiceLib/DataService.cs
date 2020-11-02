@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataServiceLib
+namespace DataServiceLib.Framework
 {
     public class DataService : IDataService
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DataServiceLib
+namespace DataServiceLib.Framework
 {
     public interface IDataService
     {

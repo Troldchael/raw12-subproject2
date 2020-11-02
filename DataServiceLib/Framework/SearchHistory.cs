@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataServiceLib
+namespace DataServiceLib.Framework
 {
-    public class RatingHistory
+    public class SearchHistory
     {
         //properties
         public int UserId { get; set; }
-        public string Rating { get; set; }
-        public string TitleId { get; set; }
+        public string Timestamp { get; set; }
+        public string Keyword { get; set; }
 
         //navigation poperties
         public string Type { get; set; } //dummy
