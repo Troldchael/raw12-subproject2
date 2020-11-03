@@ -8,12 +8,12 @@ using DataServiceLib.Framework;
 
 namespace WebService.Models.Profiles
 {
-    public class CategoryProfile : Profile
+    public class UsersProfile : Profile
     {
-        public CategoryProfile()
+        public UsersProfile()
         {
-            /*CreateMap<Category, CategoryDto>();
-            CreateMap<CategoryForCreationOrUpdateDto, Category>();*/
+            CreateMap<Users, UsersDto>();
+            //CreateMap<UsersForCreationOrUpdateDto, Users>(); //use for create user dto
         }
     }
 }

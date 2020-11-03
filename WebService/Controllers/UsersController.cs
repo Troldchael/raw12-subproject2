@@ -17,6 +17,12 @@ namespace WebService.Controllers
         IDataService _dataService;
         private readonly IMapper _mapper;
 
+        public UsersController(IDataService dataService, IMapper mapper)
+        {
+            _dataService = dataService;
+            _mapper = mapper;
+        }
+
         [HttpGet]
         public IActionResult GetUsers()
         {

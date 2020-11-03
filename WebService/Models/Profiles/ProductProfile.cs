@@ -12,10 +12,10 @@ namespace WebService.Models.Profiles
     {
         public ProductProfile()
         {
-            CreateMap<Product, ProductDetailsDto>();
+           /* CreateMap<Product, ProductDetailsDto>();
             CreateMap<Product, ProductListElementDto>()
                 .ForMember(src => src.Category,
-                    opt => opt.MapFrom(x => x.Category.Name));
+                    opt => opt.MapFrom(x => x.Category.Name));*/
         }
     }
 }
