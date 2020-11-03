@@ -10,7 +10,9 @@ using WebService.Models;
 
 namespace WebService.Controllers
 {
-    [ApiController]
+    // henrik example
+
+    /*[ApiController]
     [Route("api/products")]
     public class ProductsController : ControllerBase
     {
@@ -61,10 +63,10 @@ namespace WebService.Controllers
             return dto;
         }
 
-        /*
+        *//*
          *
          * Helpers
-         */
+         *//*
 
         private int CheckPageSize(int pageSize)
         {
@@ -111,5 +113,5 @@ namespace WebService.Controllers
         }
 
 
-    }
+    }*/
 }
