@@ -30,7 +30,6 @@ namespace WebService.Controllers
             return Ok(_mapper.Map<IEnumerable<UsersDto>>(users));
         }
 
-
     }
 
 

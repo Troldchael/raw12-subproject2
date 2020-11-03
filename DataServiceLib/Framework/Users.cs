@@ -14,7 +14,7 @@ namespace DataServiceLib.Framework
         public string Email { get; set; }
         public string Password { get; set; }
 
-        //navigation poperties
+        //navigation properties
         public string Type { get; set; } //dummy
     }
 }
