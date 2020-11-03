@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace DataServiceLib
 {
-    public class NorthWindContext : DbContext
+    public class Raw12Context : DbContext
     {
         public static readonly ILoggerFactory MyLoggerFactory
             = LoggerFactory.Create(builder => { builder.AddConsole(); });
@@ -25,7 +25,7 @@ namespace DataServiceLib
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Users>().ToTable("users");
+            modelBuilder.Entity<Users>().ToTable("users").HasKey(x => x.UserId);
             modelBuilder.Entity<Users>().Property(x => x.UserId).HasColumnName("user_id");
             modelBuilder.Entity<Users>().Property(x => x.Username).HasColumnName("username");
             modelBuilder.Entity<Users>().Property(x => x.Email).HasColumnName("email");
