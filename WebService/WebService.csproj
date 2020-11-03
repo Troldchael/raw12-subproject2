@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <StartupObject>WebService.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
