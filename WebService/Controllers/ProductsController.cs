@@ -12,6 +12,8 @@ namespace WebService.Controllers
 {
     // henrik example
 
+    //Mads
+
     /*[ApiController]
     [Route("api/products")]
     public class ProductsController : ControllerBase
