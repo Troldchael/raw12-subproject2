@@ -9,11 +9,11 @@ namespace DataServiceLib.Framework
 {
     public class DataService : IDataService
     {
+        private List<Users> _users = new List<Users>();
+
         public IList<Users> GetUsers()
         {
             return _users;
         }
-
-
     }
 }
