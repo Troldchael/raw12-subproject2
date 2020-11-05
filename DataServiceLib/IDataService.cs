@@ -12,6 +12,9 @@ namespace DataServiceLib.Framework
 
         IList<Actors> GetActors();
 
+        IList<Genres> GetGenres();
+
+
 
         /*Category GetCategory(int id);
         void CreateCategory(Category category);

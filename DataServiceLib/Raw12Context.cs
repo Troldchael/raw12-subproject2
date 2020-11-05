@@ -22,6 +22,8 @@ namespace DataServiceLib
 
         public DbSet<Actors> Actors { get; set; }
 
+        public DbSet<Genres> Genres { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -45,7 +47,11 @@ namespace DataServiceLib
             modelBuilder.Entity<Actors>().ToTable("name").HasKey(x => x.Nconst);
             modelBuilder.Entity<Actors>().Property(x => x.Nconst).HasColumnName("nconst");
             modelBuilder.Entity<Actors>().Property(x => x.PrimaryName).HasColumnName("primaryname");
-          
+
+            modelBuilder.Entity<Genres>().ToTable("genres").HasKey(x => x.Tconst);
+            modelBuilder.Entity<Genres>().Property(x => x.Tconst).HasColumnName("tconst");
+            modelBuilder.Entity<Genres>().Property(x => x.Genre).HasColumnName("genre");
+
 
 
         }

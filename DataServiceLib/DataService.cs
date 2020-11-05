@@ -33,6 +33,14 @@ namespace DataServiceLib.Framework
             var ctx = new Raw12Context();
             return ctx.Actors.ToList();
         }
+
+        private List<Genres> _genres = new List<Genres>();
+
+        public IList<Genres> GetGenres()
+        {
+            var ctx = new Raw12Context();
+            return ctx.Genres.ToList();
+        }
     }
 }
 // Test test
