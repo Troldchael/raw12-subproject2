@@ -56,17 +56,50 @@ namespace WebService.Controllers
         }
 
 
-        private UserElementDto CreateUserElementDto(Users user)
+        [HttpPost]
+        public IActionResult CreateUsers(UserForCreationOrUpdateDto userOrUpdateDto)
         {
-            var dto = _mapper.Map<UserElementDto>(user);
-            dto.Url = Url.Link(nameof(GetUser), new { user.UserId });
+            var users = _mapper.Map<Users>(userOrUpdateDto);
+
+            _dataService.CreateUsers(users);
+
+            return Created("", users);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateCategory(string id, UserForCreationOrUpdateDto userOrUpdateDto)
+        {
+            var users = _mapper.Map<Users>(userOrUpdateDto);
+
+            if (!_dataService.UpdateUsers(users))
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteUser(string id)
+        {
+            if (!_dataService.DeleteUsers(id))
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
+
+        private UserElementDto CreateUserElementDto(Users users)
+        {
+            var dto = _mapper.Map<UserElementDto>(users);
+            dto.Url = Url.Link(nameof(GetUser), new { users.UserId });
             return dto;
         }
 
 
-
         //Helpers
-
 
         private int CheckPageSize(int pageSize)
         {

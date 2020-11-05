@@ -9,7 +9,6 @@ namespace WebService.Models
     public class UserDetailsDto
     {
         public string Url { get; set; }
-        public string Name { get; set; }
-        //public string UserUrl { get; set; }
+        
     }
 }
