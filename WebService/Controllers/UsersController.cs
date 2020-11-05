@@ -35,7 +35,6 @@ namespace WebService.Controllers
 
             var result = CreateResult(page, pageSize, users);
 
-
             return Ok(result);
         }
 
@@ -49,7 +48,7 @@ namespace WebService.Controllers
                 return NotFound();
             }
 
-            var dto = _mapper.Map<UserDetailsDto>(users);
+            var dto = _mapper.Map<UserElementDto>(users);
             dto.Url = Url.Link(nameof(GetUser), new { id });
 
             return Ok(dto);

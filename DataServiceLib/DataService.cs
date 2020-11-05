@@ -13,8 +13,8 @@ namespace DataServiceLib.Framework
         public IList<Users> UserToList()
         {
             var ctx = new Raw12Context();
-            var _users = ctx.Users.ToList();
-            return _users;
+            var users = ctx.Users.ToList();
+            return users;
         }
 
         public IList<Users> GetUsers()
