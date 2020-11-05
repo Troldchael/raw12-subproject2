@@ -30,6 +30,10 @@ namespace DataServiceLib
             modelBuilder.Entity<Users>().Property(x => x.Username).HasColumnName("username");
             modelBuilder.Entity<Users>().Property(x => x.Email).HasColumnName("email");
             modelBuilder.Entity<Users>().Property(x => x.Password).HasColumnName("password");
+
+            modelBuilder.Entity<Title>().Property(x => x.TitleType).HasColumnName("titletype");
+            modelBuilder.Entity<Title>().Property(x => x.OriginalTitle).HasColumnName("originaltitle");
+            
         }
     }
 
