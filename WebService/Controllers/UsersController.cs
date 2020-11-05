@@ -26,28 +26,22 @@ namespace WebService.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public IActionResult GetUsers()
-        {
-            var users = _dataService.GetUsers();
-            return Ok(_mapper.Map<IEnumerable<UsersDto>>(users));
-        }
-
         [HttpGet(Name = nameof(GetUsers))]
         public IActionResult GetUsers(int page = 0, int pageSize = 10)
         {
             pageSize = CheckPageSize(pageSize);
 
-            var products = _dataService.GetUsers(page, pageSize);
+            var users = _dataService.GetUserInfo(page, pageSize);
 
             var result = CreateResult(page, pageSize, users);
+
 
             return Ok(result);
         }
 
 
         [HttpGet("{id}", Name = nameof(GetUser))]
-        public IActionResult GetUser(int id)
+        public IActionResult GetUser(string id)
         {
             var users = _dataService.GetUser(id);
             if (users == null)
@@ -98,7 +92,7 @@ namespace WebService.Controllers
             return (prev, cur, next);
         }
 
-        private object CreateResult(int page, int pageSize, IList<User> users)
+        private object CreateResult(int page, int pageSize, IList<Users> users)
         {
             var items = users.Select(CreateUserElementDto);
 

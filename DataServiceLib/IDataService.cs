@@ -8,13 +8,14 @@ namespace DataServiceLib
 
         IList<Users> GetUsers();
 
-        Users GetUsers(int id);
-        void CreateUsers(Users users);
+       /* void CreateUsers(Users users);
         bool UpdateUsers(Users users);
-        bool DeleteUsers(int id);
+        bool DeleteUsers(int id);*/
 
-        IList<Users> GetUsers(int page, int pageSize);
-        Users GetUser(int id);
+        Users GetUser(string id);
+
+        IList<Users> GetUserInfo(int page, int pageSize);
+       
         int NumberOfUsers();
     }
 }
