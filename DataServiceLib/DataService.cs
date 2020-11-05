@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using DataServiceLib.Moviedata;
 
 namespace DataServiceLib.Framework
 {
@@ -11,10 +12,18 @@ namespace DataServiceLib.Framework
     {
         private List<Users> _users = new List<Users>();
 
-        public IList<Users> GetUsers()
+            public IList<Users> GetUsers()
+            {
+                var ctx = new Raw12Context();
+                return ctx.Users.ToList();
+            }
+
+        private List<Details> _details = new List<Details>();
+
+        public IList<Details> GetDetails()
         {
             var ctx = new Raw12Context();
-            return ctx.Users.ToList();
+            return ctx.Details.ToList();
         }
     }
 }

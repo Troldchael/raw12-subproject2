@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataServiceLib.Framework;
+using DataServiceLib.Moviedata;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -16,6 +17,8 @@ namespace DataServiceLib
             = LoggerFactory.Create(builder => { builder.AddConsole(); });
 
         public DbSet<Users> Users { get; set; }
+
+        public DbSet<Details> Details { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -31,9 +34,13 @@ namespace DataServiceLib
             modelBuilder.Entity<Users>().Property(x => x.Email).HasColumnName("email");
             modelBuilder.Entity<Users>().Property(x => x.Password).HasColumnName("password");
 
-            modelBuilder.Entity<Title>().Property(x => x.TitleType).HasColumnName("titletype");
-            modelBuilder.Entity<Title>().Property(x => x.OriginalTitle).HasColumnName("originaltitle");
-            
+            modelBuilder.Entity<Details>().ToTable("title").HasKey(x => x.Tconst);
+            modelBuilder.Entity<Details>().Property(x => x.Tconst).HasColumnName("tconst");
+            modelBuilder.Entity<Details>().Property(x => x.TitleType).HasColumnName("titletype");
+            modelBuilder.Entity<Details>().Property(x => x.OriginalTitle).HasColumnName("originaltitle");
+
+
+
         }
     }
 

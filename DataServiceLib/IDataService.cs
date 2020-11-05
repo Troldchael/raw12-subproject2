@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DataServiceLib.Moviedata;
 
 namespace DataServiceLib.Framework
 {
@@ -6,6 +7,8 @@ namespace DataServiceLib.Framework
     {
 
         IList<Users> GetUsers();
+
+        IList<Details> GetDetails();
 
         /*Category GetCategory(int id);
         void CreateCategory(Category category);
