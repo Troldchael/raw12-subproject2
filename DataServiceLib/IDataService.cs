@@ -1,19 +1,20 @@
 ﻿using System.Collections.Generic;
+using DataServiceLib.Framework;
 
-namespace DataServiceLib.Framework
+namespace DataServiceLib
 {
     public interface IDataService
     {
 
         IList<Users> GetUsers();
 
-        /*Category GetCategory(int id);
-        void CreateCategory(Category category);
-        bool UpdateCategory(Category category);
-        bool DeleteCategory(int id);*/
+        Users GetUsers(int id);
+        void CreateUsers(Users users);
+        bool UpdateUsers(Users users);
+        bool DeleteUsers(int id);
 
-        /*IList<Product> GetProducts(int page, int pageSize);
-        Product GetProduct(int id);
-        int NumberOfProducts();*/
+        IList<Users> GetUsers(int page, int pageSize);
+        Users GetUser(int id);
+        int NumberOfUsers();
     }
 }

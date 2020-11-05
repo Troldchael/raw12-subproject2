@@ -15,6 +15,6 @@ namespace DataServiceLib.Framework
         public string Password { get; set; }
 
         //navigation properties
-        //public string Type { get; set; } //dummy
+        //dont think its needed in users
     }
 }

@@ -38,7 +38,7 @@ namespace WebService.Controllers
             return Ok(result);
         }
 
-        
+
         [HttpGet("{id}", Name = nameof(GetProduct))]
         public IActionResult GetProduct(int id)
         {
@@ -59,14 +59,14 @@ namespace WebService.Controllers
         private ProductListElementDto CreateProductElementDto(Product product)
         {
             var dto = _mapper.Map<ProductListElementDto>(product);
-            dto.Url = Url.Link(nameof(GetProduct), new {product.Id});
+            dto.Url = Url.Link(nameof(GetProduct), new { product.Id });
             return dto;
         }
 
-        *//*
-         *
-         * Helpers
-         *//*
+        
+        
+         //Helpers
+
 
         private int CheckPageSize(int pageSize)
         {
@@ -110,8 +110,9 @@ namespace WebService.Controllers
                 items
             };
             return result;
-        }
+    */
+        
 
 
-    }*/
+    
 }

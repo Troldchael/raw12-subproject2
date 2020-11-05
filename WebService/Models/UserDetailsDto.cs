@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace WebService.Models
 {
-    public class ProductDetailsDto
+    public class UserDetailsDto
     {
         public string Url { get; set; }
         public string Name { get; set; }
-        public string CategoryUrl { get; set; }
+        //public string UserUrl { get; set; }
     }
 }
