@@ -39,5 +39,36 @@ namespace DataServiceLib.Framework
         {
             return UserToList().Count;
         }
+
+        public void CreateUser(Users users)
+        {
+            var maxId = UserToList().Max(x => x.UserId);
+            users.UserId = maxId + 1;
+            UserToList().Add(users);
+        }
+
+        public bool UpdateUser(Users users)
+        {
+            var dbCat = GetUser(users.UserId);
+            if (dbCat == null)
+            {
+                return false;
+            }
+            dbCat.Username = users.Username;
+            dbCat.Email = users.Email;
+            dbCat.Password = users.Password;
+            return true;
+        }
+
+        public bool DeleteUser(string id)
+        {
+            var dbCat = GetUser(id);
+            if (dbCat == null)
+            {
+                return false;
+            }
+            UserToList().Remove(dbCat);
+            return true;
+        }
     }
 }

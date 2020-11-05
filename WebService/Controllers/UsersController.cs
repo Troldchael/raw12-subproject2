@@ -61,7 +61,7 @@ namespace WebService.Controllers
         {
             var users = _mapper.Map<Users>(userOrUpdateDto);
 
-            _dataService.CreateUsers(users);
+            _dataService.CreateUser(users);
 
             return Created("", users);
         }
@@ -71,7 +71,7 @@ namespace WebService.Controllers
         {
             var users = _mapper.Map<Users>(userOrUpdateDto);
 
-            if (!_dataService.UpdateUsers(users))
+            if (!_dataService.UpdateUser(users))
             {
                 return NotFound();
             }
@@ -83,7 +83,7 @@ namespace WebService.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteUser(string id)
         {
-            if (!_dataService.DeleteUsers(id))
+            if (!_dataService.DeleteUser(id))
             {
                 return NotFound();
             }
