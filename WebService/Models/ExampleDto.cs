@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace WebService.Models
 {
-    public class CategoryDto
+    public class ExampleDto
     {
-        public int Id { get; set; }
+        public string Url { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
+        public string Category { get; set; }
     }
 }

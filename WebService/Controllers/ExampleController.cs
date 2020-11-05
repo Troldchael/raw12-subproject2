@@ -56,9 +56,9 @@ namespace WebService.Controllers
         }
 
 
-        private ProductListElementDto CreateProductElementDto(Product product)
+        private ExampleDto CreateProductElementDto(Product product)
         {
-            var dto = _mapper.Map<ProductListElementDto>(product);
+            var dto = _mapper.Map<ExampleDto>(product);
             dto.Url = Url.Link(nameof(GetProduct), new { product.Id });
             return dto;
         }
