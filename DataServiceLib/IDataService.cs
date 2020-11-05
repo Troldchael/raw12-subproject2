@@ -10,6 +10,9 @@ namespace DataServiceLib.Framework
 
         IList<Details> GetDetails();
 
+        IList<Actors> GetActors();
+
+
         /*Category GetCategory(int id);
         void CreateCategory(Category category);
         bool UpdateCategory(Category category);

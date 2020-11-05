@@ -20,6 +20,9 @@ namespace DataServiceLib
 
         public DbSet<Details> Details { get; set; }
 
+        public DbSet<Actors> Actors { get; set; }
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLoggerFactory(MyLoggerFactory);
@@ -39,6 +42,10 @@ namespace DataServiceLib
             modelBuilder.Entity<Details>().Property(x => x.TitleType).HasColumnName("titletype");
             modelBuilder.Entity<Details>().Property(x => x.OriginalTitle).HasColumnName("originaltitle");
 
+            modelBuilder.Entity<Actors>().ToTable("name").HasKey(x => x.Nconst);
+            modelBuilder.Entity<Actors>().Property(x => x.Nconst).HasColumnName("nconst");
+            modelBuilder.Entity<Actors>().Property(x => x.PrimaryName).HasColumnName("primaryname");
+          
 
 
         }

@@ -25,6 +25,14 @@ namespace DataServiceLib.Framework
             var ctx = new Raw12Context();
             return ctx.Details.ToList();
         }
+
+        private List<Actors> _actors = new List<Actors>();
+
+        public IList<Actors> GetActors()
+        {
+            var ctx = new Raw12Context();
+            return ctx.Actors.ToList();
+        }
     }
 }
 // Test test
