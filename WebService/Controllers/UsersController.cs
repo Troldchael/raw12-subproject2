@@ -28,10 +28,7 @@ namespace WebService.Controllers
         {
             var users = _dataService.GetUsers();
             return Ok(_mapper.Map<IEnumerable<UsersDto>>(users));
-<<<<<<< HEAD
 
-=======
->>>>>>> nicobranch1
         }
 
     }
