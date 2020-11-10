@@ -22,7 +22,7 @@ namespace DataServiceLib.Framework
             return UserToList();
         }
 
-        public Users GetUser(string id)
+        public Users GetUser(int id)
         {
             return UserToList().FirstOrDefault(x => x.UserId == id);
         }
@@ -60,7 +60,7 @@ namespace DataServiceLib.Framework
             return true;
         }
 
-        public bool DeleteUser(string id)
+        public bool DeleteUser(int id)
         {
             var dbCat = GetUser(id);
             if (dbCat == null)

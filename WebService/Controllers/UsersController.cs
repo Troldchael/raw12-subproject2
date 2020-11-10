@@ -40,7 +40,7 @@ namespace WebService.Controllers
 
 
         [HttpGet("{id}", Name = nameof(GetUser))]
-        public IActionResult GetUser(string id)
+        public IActionResult GetUser(int id)
         {
             var users = _dataService.GetUser(id);
             if (users == null)
@@ -66,7 +66,7 @@ namespace WebService.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateCategory(string id, UserForCreationOrUpdateDto userOrUpdateDto)
+        public IActionResult UpdateCategory(int id, UserForCreationOrUpdateDto userOrUpdateDto)
         {
             var users = _mapper.Map<Users>(userOrUpdateDto);
 
@@ -80,7 +80,7 @@ namespace WebService.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteUser(string id)
+        public IActionResult DeleteUser(int id)
         {
             if (!_dataService.DeleteUser(id))
             {
@@ -90,13 +90,12 @@ namespace WebService.Controllers
             return NoContent();
         }
 
-        private UserElementDto CreateUserElementDto(Users users)
+        private UserElementDto CreateUserElementDto(Users users, int id)
         {
             var dto = _mapper.Map<UserElementDto>(users);
-            dto.Url = Url.Link(nameof(GetUser), new { users.UserId });
+            dto.Url = Url.Link(nameof(GetUser), new { id });
             return dto;
         }
-
 
         //Helpers
 
@@ -141,6 +140,7 @@ namespace WebService.Controllers
                 count,
                 items
             };
+
             return result;
         }
 

@@ -10,9 +10,9 @@ namespace DataServiceLib
 
         void CreateUser(Users users);
         bool UpdateUser(Users users);
-        bool DeleteUser(string id);
+        bool DeleteUser(int id);
 
-        Users GetUser(string id);
+        Users GetUser(int id);
 
         IList<Users> GetUserInfo(int page, int pageSize);
        
