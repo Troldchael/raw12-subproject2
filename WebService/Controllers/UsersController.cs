@@ -40,6 +40,7 @@ namespace WebService.Controllers
         {
             var users = _dataService.GetUsers();
             return Ok(_mapper.Map<IEnumerable<UsersDto>>(users));
+<<<<<<< HEAD
 
 =======
         [HttpGet(Name = nameof(GetUsers))]
@@ -159,6 +160,16 @@ namespace WebService.Controllers
 
             return result;
 >>>>>>> nicobranch1
+=======
+/*<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
+=======
+
+>>>>>>> origin/Casper*/
+>>>>>>> origin/Mads
         }
 
     }
