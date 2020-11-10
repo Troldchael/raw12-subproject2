@@ -17,6 +17,7 @@ namespace DataServiceLib
         IList<Details> GetDetails();
 
         IList<Actors> GetActors();
+        Actors GetActor(string id);
 
         IList<Genres> GetGenres();
 
@@ -30,6 +31,7 @@ namespace DataServiceLib
         bool DeleteCategory(int id);*/
 
         Users GetUser(int id);
+        
 
         IList<Users> GetUserInfo(int page, int pageSize);
        

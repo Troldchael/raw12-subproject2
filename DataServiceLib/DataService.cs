@@ -72,6 +72,7 @@ namespace DataServiceLib.Framework
             return true;
         }
 
+        // actors 
         private List<Details> _details = new List<Details>();
 
         public IList<Details> GetDetails()
@@ -80,13 +81,32 @@ namespace DataServiceLib.Framework
             return ctx.Details.ToList();
         }
 
-        private List<Actors> _actors = new List<Actors>();
+       // private List<Actors> _actors = new List<Actors>();
 
-        public IList<Actors> GetActors()
-        {
+       // public IList<Actors> GetActors()
+       /* {
             var ctx = new Raw12Context();
             return ctx.Actors.ToList();
-        }
+        }*/
+       public IList<Actors>ActorToList()
+       {
+           var ctx = new Raw12Context();
+           var actors = ctx.Actors.ToList();
+           return actors;
+       }
+
+       public IList<Actors> GetActors()
+       {
+           return ActorToList();
+       }
+
+       public Actors GetActor(string id)
+       {
+           var ctx = new Raw12Context();
+           var actors = ctx.Actors;
+
+           return ctx.Actors.FirstOrDefault(x => x.Nconst == id);
+       }
 
         private List<Genres> _genres = new List<Genres>();
 

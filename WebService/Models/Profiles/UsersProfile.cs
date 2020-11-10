@@ -16,6 +16,8 @@ namespace WebService.Models.Profiles
             CreateMap<UserForCreationOrUpdateDto, Users>();
             CreateMap<Users, UserElementDto>();
 
+            CreateMap<Actors, ActorElementDto>();
+
             //use to add from other tables to dto
             /*CreateMap<Exampleclass, ExampleDto>()
                 .ForMember(src => src.Category,
