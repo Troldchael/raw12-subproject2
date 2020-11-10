@@ -37,6 +37,7 @@ namespace WebService.Controllers
             var users = _dataService.GetUsers();
             return Ok(_mapper.Map<IEnumerable<UsersDto>>(users));
 
+        }
             [HttpGet(Name = nameof(GetUsers))]
         public IActionResult GetUsers(int page = 0, int pageSize = 10)
         {
