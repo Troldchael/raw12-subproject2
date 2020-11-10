@@ -24,7 +24,10 @@ namespace DataServiceLib.Framework
 
         public Users GetUser(int id)
         {
-            return UserToList().FirstOrDefault(x => x.UserId == id);
+            var ctx = new Raw12Context();
+            var users = ctx.Users;
+
+            return ctx.Users.FirstOrDefault(x => x.UserId == id);
         }
 
         public IList<Users> GetUserInfo(int page, int pageSize)
@@ -40,34 +43,55 @@ namespace DataServiceLib.Framework
             return UserToList().Count;
         }
 
-        public void CreateUser(Users users)
+        public bool CreateUser(Users users)
         {
             var maxId = UserToList().Max(x => x.UserId);
             users.UserId = maxId + 1;
-            UserToList().Add(users);
-        }
 
-        public bool UpdateUser(Users users)
-        {
             var dbCat = GetUser(users.UserId);
             if (dbCat == null)
             {
                 return false;
             }
+
             dbCat.Username = users.Username;
             dbCat.Email = users.Email;
             dbCat.Password = users.Password;
+
+            return true;
+        }
+
+        public bool UpdateUser(Users users)
+        {
+            var cont = new Raw12Context();
+
+            var dbCat = GetUser(users.UserId);
+            if (dbCat == null)
+            {
+                return false;
+            }
+
+            dbCat.Username = users.Username;
+            dbCat.Email = users.Email;
+            dbCat.Password = users.Password;
+
+            cont.Users.Update(dbCat);
+            cont.SaveChanges();
+
             return true;
         }
 
         public bool DeleteUser(int id)
         {
+            var cont = new Raw12Context();
             var dbCat = GetUser(id);
             if (dbCat == null)
             {
                 return false;
             }
-            UserToList().Remove(dbCat);
+
+            cont.Users.Remove(dbCat);
+            cont.SaveChanges();
             return true;
         }
     }

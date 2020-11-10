@@ -8,7 +8,7 @@ namespace DataServiceLib
 
         IList<Users> GetUsers();
 
-        void CreateUser(Users users);
+        bool CreateUser(Users users);
         bool UpdateUser(Users users);
         bool DeleteUser(int id);
 

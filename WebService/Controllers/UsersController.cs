@@ -66,9 +66,11 @@ namespace WebService.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateCategory(int id, UserForCreationOrUpdateDto userOrUpdateDto)
+        public IActionResult UpdateUser(int id, UserForCreationOrUpdateDto userOrUpdateDto)
         {
             var users = _mapper.Map<Users>(userOrUpdateDto);
+
+            users.UserId = id; //use this coz of boilercode
 
             if (!_dataService.UpdateUser(users))
             {
@@ -92,8 +94,15 @@ namespace WebService.Controllers
 
         private UserElementDto CreateUserElementDto(Users users)
         {
+
+
             var dto = _mapper.Map<UserElementDto>(users);
-            dto.Url = Url.Link(nameof(GetUser), new { users.UserId });
+
+
+            //dto.Url = Url.Link(nameof(GetUser), new { users.UserId });
+
+            dto.Url = "2";
+
             return dto;
         }
 
