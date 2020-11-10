@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-<<<<<<< HEAD
-=======
 using DataServiceLib;
->>>>>>> nicobranch1
+
 using DataServiceLib.Framework;
 using Microsoft.AspNetCore.Mvc;
 using WebService.Models;
@@ -18,15 +16,14 @@ namespace WebService.Controllers
     [Route("api/users")]
     public class UsersController : ControllerBase
     {
-<<<<<<< HEAD
+
         IDataService _dataService;
         private readonly IMapper _mapper;
-=======
-        private readonly IDataService _dataService;
-        private readonly IMapper _mapper;
+
+      
         private const int MaxPageSize = 25;
 
->>>>>>> nicobranch1
+
 
         public UsersController(IDataService dataService, IMapper mapper)
         {
@@ -34,16 +31,13 @@ namespace WebService.Controllers
             _mapper = mapper;
         }
 
-<<<<<<< HEAD
         [HttpGet]
         public IActionResult GetUsers()
         {
             var users = _dataService.GetUsers();
             return Ok(_mapper.Map<IEnumerable<UsersDto>>(users));
-<<<<<<< HEAD
 
-=======
-        [HttpGet(Name = nameof(GetUsers))]
+            [HttpGet(Name = nameof(GetUsers))]
         public IActionResult GetUsers(int page = 0, int pageSize = 10)
         {
             pageSize = CheckPageSize(pageSize);
@@ -57,7 +51,7 @@ namespace WebService.Controllers
 
 
         [HttpGet("{id}", Name = nameof(GetUser))]
-        public IActionResult GetUser(int id)
+            public IActionResult GetUser(int id)
         {
             var users = _dataService.GetUser(id);
             if (users == null)
@@ -159,20 +153,12 @@ namespace WebService.Controllers
             };
 
             return result;
->>>>>>> nicobranch1
-=======
-/*<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> master
-=======
-
->>>>>>> origin/Casper*/
->>>>>>> origin/Mads
         }
 
     }
 
 
 }
+}
+

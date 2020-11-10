@@ -8,10 +8,8 @@
         public string TitleType { get; set; }
 
         //navigation poperties
-<<<<<<< HEAD
-        //public string Type { get; set; } //dummy
-=======
+
         public string OriginalTitle { get; set; } //dummy
->>>>>>> origin/Mads
+
     }
 }

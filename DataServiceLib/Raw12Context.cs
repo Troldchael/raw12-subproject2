@@ -30,14 +30,17 @@ namespace DataServiceLib
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLoggerFactory(MyLoggerFactory);
-<<<<<<< HEAD
+
             optionsBuilder.UseNpgsql("host=localhost;;db=imdb;uid=postgres;pwd=Kiwikatte2");
-            
+
+            optionsBuilder.UseNpgsql("host=localhost;;db=imdb.2;uid=postgres;pwd=1234");
+
+
             // rawdata raw12 server
             //optionsBuilder.UseNpgsql("host=rawdata.ruc.dk;port=5432;db=raw12;uid=raw12;pwd=uWISa4yb");
-=======
+
             optionsBuilder.UseNpgsql("host=localhost;db=IMDB;uid=postgres;pwd=KaffeKop+1");
->>>>>>> origin/Mads
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

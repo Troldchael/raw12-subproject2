@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using DataServiceLib;
 using DataServiceLib.Framework;
 using DataServiceLib.Moviedata;
 using Microsoft.AspNetCore.Mvc;

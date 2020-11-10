@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-<<<<<<< HEAD
+
 using DataServiceLib.Framework;
-=======
+
 using DataServiceLib.Moviedata;
->>>>>>> origin/Mads
 
 namespace DataServiceLib
 {
@@ -12,11 +11,9 @@ namespace DataServiceLib
 
         IList<Users> GetUsers();
 
-<<<<<<< HEAD
         void CreateUser(Users users);
         bool UpdateUser(Users users);
         bool DeleteUser(int id);
-=======
         IList<Details> GetDetails();
 
         IList<Actors> GetActors();
@@ -31,7 +28,6 @@ namespace DataServiceLib
         void CreateCategory(Category category);
         bool UpdateCategory(Category category);
         bool DeleteCategory(int id);*/
->>>>>>> origin/Mads
 
         Users GetUser(int id);
 
