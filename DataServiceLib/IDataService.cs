@@ -14,6 +14,8 @@ namespace DataServiceLib.Framework
 
         IList<Genres> GetGenres();
 
+        IList<Ratings> GetRatings();
+
 
 
         /*Category GetCategory(int id);

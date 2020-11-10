@@ -24,11 +24,13 @@ namespace DataServiceLib
 
         public DbSet<Genres> Genres { get; set; }
 
+        public DbSet<Ratings> Ratings { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLoggerFactory(MyLoggerFactory);
-            optionsBuilder.UseNpgsql("host=localhost;db=IMDD;uid=postgres;pwd=KaffeKop+1");
+            optionsBuilder.UseNpgsql("host=localhost;db=IMDB;uid=postgres;pwd=KaffeKop+1");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -51,6 +53,11 @@ namespace DataServiceLib
             modelBuilder.Entity<Genres>().ToTable("genres").HasKey(x => x.Tconst);
             modelBuilder.Entity<Genres>().Property(x => x.Tconst).HasColumnName("tconst");
             modelBuilder.Entity<Genres>().Property(x => x.Genre).HasColumnName("genre");
+
+            modelBuilder.Entity<Ratings>().ToTable("ratings").HasKey(x => x.Tconst);
+            modelBuilder.Entity<Ratings>().Property(x => x.Tconst).HasColumnName("tconst");
+            modelBuilder.Entity<Ratings>().Property(x => x.Averagerating).HasColumnName("averagerating");
+            modelBuilder.Entity<Ratings>().Property(x => x.Numvotes).HasColumnName("numvotes");
 
 
 

@@ -12,11 +12,11 @@ namespace DataServiceLib.Framework
     {
         private List<Users> _users = new List<Users>();
 
-            public IList<Users> GetUsers()
-            {
-                var ctx = new Raw12Context();
-                return ctx.Users.ToList();
-            }
+        public IList<Users> GetUsers()
+        {
+            var ctx = new Raw12Context();
+            return ctx.Users.ToList();
+        }
 
         private List<Details> _details = new List<Details>();
 
@@ -40,6 +40,15 @@ namespace DataServiceLib.Framework
         {
             var ctx = new Raw12Context();
             return ctx.Genres.ToList();
+        }
+
+        private List<Ratings> _ratings = new List<Ratings>();
+
+        public IList<Ratings> GetRatings()
+        {
+            var ctx = new Raw12Context();
+
+            return ctx.Ratings.ToList();
         }
     }
 }
