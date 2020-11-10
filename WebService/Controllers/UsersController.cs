@@ -90,10 +90,10 @@ namespace WebService.Controllers
             return NoContent();
         }
 
-        private UserElementDto CreateUserElementDto(Users users, int id)
+        private UserElementDto CreateUserElementDto(Users users)
         {
             var dto = _mapper.Map<UserElementDto>(users);
-            dto.Url = Url.Link(nameof(GetUser), new { id });
+            dto.Url = Url.Link(nameof(GetUser), new { users.UserId });
             return dto;
         }
 
