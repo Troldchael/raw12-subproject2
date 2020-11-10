@@ -94,14 +94,11 @@ namespace WebService.Controllers
 
         private UserElementDto CreateUserElementDto(Users users)
         {
-
-
             var dto = _mapper.Map<UserElementDto>(users);
 
+            dto.Url = Url.Link(nameof(GetUser), new { userint = users.UserId.ToString() });
 
-            dto.Url = Url.Link(nameof(GetUser), new { users.UserId });
-
-            //dto.Url = "2";
+            //dto.Url = "2"; //used to test if hardcode int works
 
             return dto;
         }
