@@ -3,9 +3,9 @@
     public class Details
     {
         //properties
-        public TYPE Type1 { get; set; }
+        public string Type1 { get; set; }
 
         //navigation poperties
-        public string Type { get; set; } //dummy
+        //public string Type { get; set; } //dummy
     }
 }
