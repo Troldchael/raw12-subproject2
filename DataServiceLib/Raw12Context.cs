@@ -28,7 +28,7 @@ namespace DataServiceLib
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLoggerFactory(MyLoggerFactory);
-            optionsBuilder.UseNpgsql("host=localhost;db=imdb.2;uid=postgres;pwd=1234");
+            optionsBuilder.UseNpgsql("host=localhost;db=IMDD;uid=postgres;pwd=KaffeKop+1");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -57,5 +57,6 @@ namespace DataServiceLib
         }
     }
 
-    
+    //Hej
+
 }
