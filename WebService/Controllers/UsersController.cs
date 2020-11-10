@@ -70,7 +70,7 @@ namespace WebService.Controllers
         {
             var users = _mapper.Map<Users>(userOrUpdateDto);
 
-            users.UserId = id; //use this coz of boilercode
+            users.UserId = id; //fix for null value from id
 
             if (!_dataService.UpdateUser(users))
             {
@@ -99,9 +99,9 @@ namespace WebService.Controllers
             var dto = _mapper.Map<UserElementDto>(users);
 
 
-            //dto.Url = Url.Link(nameof(GetUser), new { users.UserId });
+            dto.Url = Url.Link(nameof(GetUser), new { users.UserId });
 
-            dto.Url = "2";
+            //dto.Url = "2";
 
             return dto;
         }
