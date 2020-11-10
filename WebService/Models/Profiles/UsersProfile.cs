@@ -14,7 +14,9 @@ namespace WebService.Models.Profiles
         {
             CreateMap<Users, UsersDto>();
             CreateMap<UserForCreationOrUpdateDto, Users>();
-            CreateMap<Users, UserElementDto>();
+            CreateMap<Users, UserElementDto>()
+                .ForMember(src => src.UserId,
+                opt => opt.MapFrom(x => x.UserId)); //try to map id so url will work
 
             //use to add from other tables to dto
             /*CreateMap<Exampleclass, ExampleDto>()

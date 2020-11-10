@@ -92,11 +92,13 @@ namespace WebService.Controllers
             return NoContent();
         }
 
-        private UserElementDto CreateUserElementDto(Users users)
+        public UserElementDto CreateUserElementDto(Users users)
         {
             var dto = _mapper.Map<UserElementDto>(users);
 
-            dto.Url = Url.Link(nameof(GetUser), new { userint = users.UserId.ToString() });
+            //var urlId = _mapper.Map<UserElementDto>(users.UserId); //possible null id value fix
+
+            dto.Url = Url.Link(nameof(GetUser), new { users.UserId }); //still returns null??
 
             //dto.Url = "2"; //used to test if hardcode int works
 
@@ -131,7 +133,9 @@ namespace WebService.Controllers
 
         private object CreateResult(int page, int pageSize, IList<Users> users)
         {
-            var items = users.Select(CreateUserElementDto);
+            var items = users.Select(CreateUserElementDto); //try make own url var
+
+            //var url = GetUser(users.UserId);
 
             var count = _dataService.NumberOfUsers();
 
@@ -145,6 +149,7 @@ namespace WebService.Controllers
                 navigationUrls.next,
                 count,
                 items
+                //try make own url var
             };
 
             return result;

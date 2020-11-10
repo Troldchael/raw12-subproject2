@@ -22,10 +22,10 @@ namespace DataServiceLib
             optionsBuilder.UseLoggerFactory(MyLoggerFactory);
 
             // nico local database
-            //optionsBuilder.UseNpgsql("host=localhost;;db=imdb;uid=postgres;pwd=Kiwikatte2");
+            optionsBuilder.UseNpgsql("host=localhost;;db=imdb;uid=postgres;pwd=Kiwikatte2");
             
             // rawdata remote database
-            optionsBuilder.UseNpgsql("host=rawdata.ruc.dk;port=5432;db=raw12;uid=raw12;pwd=uWISa4yb");
+            //optionsBuilder.UseNpgsql("host=rawdata.ruc.dk;port=5432;db=raw12;uid=raw12;pwd=uWISa4yb");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
