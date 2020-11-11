@@ -39,67 +39,27 @@ namespace WebService.Controllers
         }
 
 
-        [HttpGet("{id}", Name = nameof(GetUser))]
-        public IActionResult GetUser(int id)
+        [HttpGet("{id}", Name = nameof(GetSearch))]
+        public IActionResult GetSearch(int id)
         {
-            var users = _dataService.GetUser(id);
+            var users = _dataService.GetSearch(id);
             if (users == null)
             {
                 return NotFound();
             }
 
-            var dto = _mapper.Map<UserElementDto>(users);
-            dto.Url = Url.Link(nameof(GetUser), new { id });
+            var dto = _mapper.Map<SearchElementDto>(searches);
+            dto.Url = Url.Link(nameof(GetSearch), new { id });
 
             return Ok(dto);
         }
 
-
-        [HttpPost]
-        public IActionResult CreateUsers(UserForCreationOrUpdateDto userOrUpdateDto)
-        {
-            var users = _mapper.Map<Users>(userOrUpdateDto);
-
-            _dataService.CreateUser(users);
-
-            return Created("", users);
-        }
-
-        [HttpPut("{id}")]
-        public IActionResult UpdateUser(int id, UserForCreationOrUpdateDto userOrUpdateDto)
-        {
-            var users = _mapper.Map<Users>(userOrUpdateDto);
-
-            users.UserId = id; //this fixes the id null value
-
-            if (!_dataService.UpdateUser(users))
-            {
-                return NotFound();
-            }
-
-            return NoContent();
-
-        }
-
-        [HttpDelete("{id}")]
-        public IActionResult DeleteUser(int id)
-        {
-            if (!_dataService.DeleteUser(id))
-            {
-                return NotFound();
-            }
-
-            return NoContent();
-        }
-
-        private UserElementDto CreateUserElementDto(Users users)
+        private SearchElementDto CreateSearchElementDto(SearchHistory searches)
         {
 
+            var dto = _mapper.Map<SearchElementDto>(searches);
 
-            var dto = _mapper.Map<UserElementDto>(users);
-
-
-            dto.Url = Url.Link(nameof(GetUser), new { users.UserId });
+            dto.Url = Url.Link(nameof(GetSearch), new { searches.UserId });
 
             //dto.Url = "2";
 
@@ -119,24 +79,24 @@ namespace WebService.Controllers
 
             if (page > 0)
             {
-                prev = Url.Link(nameof(GetUsers), new { page = page - 1, pageSize });
+                prev = Url.Link(nameof(GetSearch), new { page = page - 1, pageSize });
             }
 
             string next = null;
 
             if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
-                next = Url.Link(nameof(GetUsers), new { page = page + 1, pageSize });
+                next = Url.Link(nameof(GetSearch), new { page = page + 1, pageSize });
 
-            var cur = Url.Link(nameof(GetUsers), new { page, pageSize });
+            var cur = Url.Link(nameof(GetSearch), new { page, pageSize });
 
             return (prev, cur, next);
         }
 
-        private object CreateResult(int page, int pageSize, IList<Users> users)
+        private object CreateResult(int page, int pageSize, IList<SearchHistory> searches)
         {
-            var items = users.Select(CreateUserElementDto);
+            var items = searches.Select(CreateSearchElementDto);
 
-            var count = _dataService.NumberOfUsers();
+            var count = _dataService.NumberOfSearches();
 
             var navigationUrls = CreatePagingNavigation(page, pageSize, count);
 
