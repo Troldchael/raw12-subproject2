@@ -70,7 +70,7 @@ namespace WebService.Controllers
         {
             var users = _mapper.Map<Users>(userOrUpdateDto);
 
-            users.UserId = id; //fix for null value from id
+            users.UserId = id; //this fixes the id null value
 
             if (!_dataService.UpdateUser(users))
             {
@@ -92,15 +92,16 @@ namespace WebService.Controllers
             return NoContent();
         }
 
-        public UserElementDto CreateUserElementDto(Users users)
+        private UserElementDto CreateUserElementDto(Users users)
         {
+
+
             var dto = _mapper.Map<UserElementDto>(users);
 
-            //var urlId = _mapper.Map<UserElementDto>(users.UserId); //possible null id value fix
 
-            dto.Url = Url.Link(nameof(GetUser), new { users.UserId }); //still returns null??
+            dto.Url = Url.Link(nameof(GetUser), new { users.UserId });
 
-            //dto.Url = "2"; //used to test if hardcode int works
+            //dto.Url = "2";
 
             return dto;
         }
@@ -133,9 +134,7 @@ namespace WebService.Controllers
 
         private object CreateResult(int page, int pageSize, IList<Users> users)
         {
-            var items = users.Select(CreateUserElementDto); //try make own url var
-
-            //var url = GetUser(users.UserId);
+            var items = users.Select(CreateUserElementDto);
 
             var count = _dataService.NumberOfUsers();
 
@@ -149,7 +148,6 @@ namespace WebService.Controllers
                 navigationUrls.next,
                 count,
                 items
-                //try make own url var
             };
 
             return result;

@@ -14,6 +14,6 @@ namespace DataServiceLib.Framework
         public string Keyword { get; set; }
 
         //navigation poperties
-        public string Type { get; set; } //dummy
+        //public string Type { get; set; } //dummy
     }
 }

@@ -13,6 +13,6 @@ namespace DataServiceLib.Framework
         public string Nconst { get; set; }
 
         //navigation poperties
-        public string Type { get; set; } //dummy
+        //public string Type { get; set; } //dummy
     }
 }
