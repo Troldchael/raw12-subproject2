@@ -12,7 +12,7 @@ using WebService.Models;
 namespace WebService.Controllers
 {
     [ApiController]
-    [Route("api/searchhistory")]
+    [Route("api/searches")]
     public class SearchController : ControllerBase
     {
         private readonly IDataService _dataService;
