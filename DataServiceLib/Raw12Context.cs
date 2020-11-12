@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataServiceLib.Framework;
+using DataServiceLib.Moviedata;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -65,7 +66,10 @@ namespace DataServiceLib
             modelBuilder.Entity<TitleBookmarking>().Property(x => x.TitleId).HasColumnName("title_id");
 
             // Movie data entities
-            //make diz
+            /*modelBuilder.Entity<Actors>().ToTable("name").HasKey(x => x.UserId);
+            modelBuilder.Entity<TitleBookmarking>().Property(x => x.UserId).HasColumnName("user_id");
+            modelBuilder.Entity<TitleBookmarking>().Property(x => x.TitleId).HasColumnName("title_id");
+*/
         }
     }
 
