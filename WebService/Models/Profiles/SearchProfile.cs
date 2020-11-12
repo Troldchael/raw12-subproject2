@@ -8,13 +8,11 @@ using DataServiceLib.Framework;
 
 namespace WebService.Models.Profiles
 {
-    public class UsersProfile : Profile
+    public class SearchProfile : Profile
     {
-        public UsersProfile()
+        public SearchProfile()
         {
-            CreateMap<Users, UsersDto>();
-            CreateMap<UserForCreationOrUpdateDto, Users>();
-            CreateMap<Users, UserElementDto>();
+            CreateMap<SearchHistory, SearchElementDto>();
 
                /* .ForMember(src => src.UserId,
                 opt => opt.MapFrom(x => x.UserId)); //try to map id so url will work*/
@@ -24,7 +22,5 @@ namespace WebService.Models.Profiles
                 .ForMember(src => src.Category,
                     opt => opt.MapFrom(x => x.Category.Name));*/
         }
-
-        
     }
 }

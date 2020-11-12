@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace WebService.Models
 {
-    public class UserForCreationOrUpdateDto
+    public class SearchElementDto
     {
         public int UserId { get; set; }
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public string Timestamp { get; set; }
+        public string Keyword { get; set; }
+        public string Url { get; set; }
     }
 }

@@ -10,10 +10,10 @@ namespace DataServiceLib.Framework
     {
         //properties
         public int UserId { get; set; }
-        public string Rating { get; set; }
+        public int Rating { get; set; }
         public string TitleId { get; set; }
 
         //navigation poperties
-        public string Type { get; set; } //dummy
+        //public string Type { get; set; } //dummy
     }
 }

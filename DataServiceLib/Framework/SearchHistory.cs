@@ -10,10 +10,10 @@ namespace DataServiceLib.Framework
     {
         //properties
         public int UserId { get; set; }
-        public string Timestamp { get; set; }
+        public DateTime Timestamp { get; set; }
         public string Keyword { get; set; }
 
         //navigation poperties
-        public string Type { get; set; } //dummy
+        //public string Type { get; set; } //dummy
     }
 }

@@ -19,9 +19,13 @@ namespace WebService.Controllers
 
         IDataService _dataService;
         private readonly IMapper _mapper;
+<<<<<<< HEAD
 
       
         private const int MaxPageSize = 25;
+=======
+        private const int MaxPageSize = 1;
+>>>>>>> nicobranch1
 
 
 
@@ -79,9 +83,11 @@ namespace WebService.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateCategory(int id, UserForCreationOrUpdateDto userOrUpdateDto)
+        public IActionResult UpdateUser(int id, UserForCreationOrUpdateDto userOrUpdateDto)
         {
             var users = _mapper.Map<Users>(userOrUpdateDto);
+
+            users.UserId = id; //this fixes the id null value
 
             if (!_dataService.UpdateUser(users))
             {
@@ -106,11 +112,11 @@ namespace WebService.Controllers
         private UserElementDto CreateUserElementDto(Users users)
         {
             var dto = _mapper.Map<UserElementDto>(users);
-            dto.Url = Url.Link(nameof(GetUser), new { users.UserId });
+
+            dto.Url = Url.Link(nameof(GetUser), new {id = users.UserId});
+
             return dto;
         }
-
-        //Helpers
 
         private int CheckPageSize(int pageSize)
         {

@@ -10,7 +10,7 @@ namespace DataServiceLib.Framework
 {
     public class DataService : IDataService
     {
-
+        // Users data service
         public IList<Users> UserToList()
         {
             var ctx = new Raw12Context();
@@ -25,7 +25,10 @@ namespace DataServiceLib.Framework
 
         public Users GetUser(int id)
         {
-            return UserToList().FirstOrDefault(x => x.UserId == id);
+            var ctx = new Raw12Context();
+            var users = ctx.Users;
+
+            return users.FirstOrDefault(x => x.UserId == id);
         }
 
         public IList<Users> GetUserInfo(int page, int pageSize)
@@ -41,37 +44,59 @@ namespace DataServiceLib.Framework
             return UserToList().Count;
         }
 
-        public void CreateUser(Users users)
+        public bool CreateUser(Users users)
         {
             var maxId = UserToList().Max(x => x.UserId);
             users.UserId = maxId + 1;
-            UserToList().Add(users);
-        }
 
-        public bool UpdateUser(Users users)
-        {
             var dbCat = GetUser(users.UserId);
             if (dbCat == null)
             {
                 return false;
             }
+
             dbCat.Username = users.Username;
             dbCat.Email = users.Email;
             dbCat.Password = users.Password;
+
+            return true;
+        }
+
+        public bool UpdateUser(Users users)
+        {
+            var cont = new Raw12Context();
+
+            var dbCat = GetUser(users.UserId);
+            if (dbCat == null)
+            {
+                return false;
+            }
+
+            dbCat.Username = users.Username;
+            dbCat.Email = users.Email;
+            dbCat.Password = users.Password;
+
+            cont.Users.Update(dbCat);
+            cont.SaveChanges();
+
             return true;
         }
 
         public bool DeleteUser(int id)
         {
+            var cont = new Raw12Context();
             var dbCat = GetUser(id);
             if (dbCat == null)
             {
                 return false;
             }
-            UserToList().Remove(dbCat);
+
+            cont.Users.Remove(dbCat);
+            cont.SaveChanges();
             return true;
         }
 
+<<<<<<< HEAD
         private List<Details> _details = new List<Details>();
 
         public IList<Details> GetDetails()
@@ -103,6 +128,75 @@ namespace DataServiceLib.Framework
             var ctx = new Raw12Context();
 
             return ctx.Ratings.ToList();
+=======
+        // searchhistory data service
+        public IList<SearchHistory> SearchToList()
+        {
+            var ctx = new Raw12Context();
+            var searches = ctx.SearchHistory.ToList();
+            return searches;
+        }
+
+        public IList<SearchHistory> GetSearches()
+        {
+            return SearchToList();
+        }
+
+        public SearchHistory GetSearch(int id)
+        {
+            var ctx = new Raw12Context();
+            var searches = ctx.SearchHistory;
+
+            return searches.FirstOrDefault(x => x.UserId == id);
+        }
+
+        public IList<SearchHistory> GetSearchInfo(int page, int pageSize)
+        {
+            return SearchToList()
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToList();
+        }
+
+        public int NumberOfSearches()
+        {
+            return SearchToList().Count;
+        }
+
+
+        // ratings dataservice
+        public IList<RatingHistory> RatingsToList()
+        {
+            var ctx = new Raw12Context();
+            var ratings = ctx.RatingHistory.ToList();
+            return ratings;
+        }
+
+        public IList<RatingHistory> GetRatings()
+        {
+            return RatingsToList();
+        }
+
+        public RatingHistory GetRating(int id)
+        {
+            var ctx = new Raw12Context();
+            var ratings = ctx.RatingHistory;
+
+            return ratings.FirstOrDefault(x => x.UserId == id);
+        }
+
+        public IList<RatingHistory> GetRatingInfo(int page, int pageSize)
+        {
+            return RatingsToList()
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToList();
+        }
+
+        public int NumberOfRatings()
+        {
+            return SearchToList().Count;
+>>>>>>> nicobranch1
         }
     }
 }
