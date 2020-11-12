@@ -9,7 +9,7 @@ namespace DataServiceLib.Framework
 {
     public class DataService : IDataService
     {
-
+        // Users data service
         public IList<Users> UserToList()
         {
             var ctx = new Raw12Context();
@@ -27,7 +27,7 @@ namespace DataServiceLib.Framework
             var ctx = new Raw12Context();
             var users = ctx.Users;
 
-            return ctx.Users.FirstOrDefault(x => x.UserId == id);
+            return users.FirstOrDefault(x => x.UserId == id);
         }
 
         public IList<Users> GetUserInfo(int page, int pageSize)
@@ -94,5 +94,40 @@ namespace DataServiceLib.Framework
             cont.SaveChanges();
             return true;
         }
+
+        // searchhistory data service
+        public IList<SearchHistory> SearchToList()
+        {
+            var ctx = new Raw12Context();
+            var searches = ctx.SearchHistory.ToList();
+            return searches;
+        }
+
+        public IList<SearchHistory> GetSearches()
+        {
+            return SearchToList();
+        }
+
+        public SearchHistory GetSearch(int id)
+        {
+            var ctx = new Raw12Context();
+            var searches = ctx.SearchHistory;
+
+            return searches.FirstOrDefault(x => x.UserId == id);
+        }
+
+        public IList<SearchHistory> GetSearchInfo(int page, int pageSize)
+        {
+            return SearchToList()
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToList();
+        }
+
+        public int NumberOfSearches()
+        {
+            return SearchToList().Count;
+        }
+
     }
 }

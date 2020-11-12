@@ -16,6 +16,7 @@ namespace DataServiceLib
             = LoggerFactory.Create(builder => { builder.AddConsole(); });
 
         public DbSet<Users> Users { get; set; }
+        public DbSet<SearchHistory> SearchHistory { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

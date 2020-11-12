@@ -42,8 +42,8 @@ namespace WebService.Controllers
         [HttpGet("{id}", Name = nameof(GetSearch))]
         public IActionResult GetSearch(int id)
         {
-            var users = _dataService.GetSearch(id);
-            if (users == null)
+            var searches = _dataService.GetSearch(id);
+            if (searches == null)
             {
                 return NotFound();
             }
