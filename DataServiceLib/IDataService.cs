@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using DataServiceLib.Framework;
 
@@ -11,7 +12,7 @@ namespace DataServiceLib
 
         IList<Users> GetUsers();
 
-        void CreateUser(Users users);
+        void CreateUser(string username, string password, string salt);
         bool UpdateUser(Users users);
         bool DeleteUser(int id);
         IList<Details> GetDetails();
@@ -29,7 +30,9 @@ namespace DataServiceLib
         bool UpdateCategory(Category category);
         bool DeleteCategory(int id);*/
 
-        Users GetUser(int id);
+        Users GetUserId(int id);
+
+        Users GetUserName(String userName);
 
         IList<Users> GetUserInfo(int page, int pageSize);
        

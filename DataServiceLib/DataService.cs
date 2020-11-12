@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using DataServiceLib.Moviedata;
@@ -23,9 +24,20 @@ namespace DataServiceLib.Framework
             return UserToList();
         }
 
-        public Users GetUser(int id)
+        public bool UpdateUser(Users users)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public Users GetUserId(int id)
         {
             return UserToList().FirstOrDefault(x => x.UserId == id);
+        }
+
+        public Users GetUserName(string username)
+        {
+            return UserToList().FirstOrDefault(x => x.Username == username);
         }
 
         public IList<Users> GetUserInfo(int page, int pageSize)
@@ -41,16 +53,26 @@ namespace DataServiceLib.Framework
             return UserToList().Count;
         }
 
-        public void CreateUser(Users users)
+        public void CreateUser(string username, string password, string salt)
         {
-            var maxId = UserToList().Max(x => x.UserId);
-            users.UserId = maxId + 1;
-            UserToList().Add(users);
+            var users = new Users();
+
+            {
+                
+            }
+
+            dbCat.Username = Id.Username;
+            dbCat.Email = Id.Email;
+            dbCat.Password = Id.Password;
+            dbCat.Salt = Id.Salt;
+
+            return;
         }
 
-        public bool UpdateUser(Users users)
+      
+        public bool UpdateUser(Users users, int id)
         {
-            var dbCat = GetUser(users.UserId);
+            var dbCat = GetUserId(id);
             if (dbCat == null)
             {
                 return false;
@@ -63,7 +85,7 @@ namespace DataServiceLib.Framework
 
         public bool DeleteUser(int id)
         {
-            var dbCat = GetUser(id);
+            var dbCat = GetUserId(id);
             if (dbCat == null)
             {
                 return false;
