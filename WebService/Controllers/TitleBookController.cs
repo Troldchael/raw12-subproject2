@@ -11,7 +11,7 @@ using WebService.Models;
 
 namespace WebService.Controllers
 {
-    [ApiController]
+    /*[ApiController]
     [Route("api/searches")]
     public class SearchController : ControllerBase
     {
@@ -114,6 +114,6 @@ namespace WebService.Controllers
         }
 
     }
-
+*/
 
 }

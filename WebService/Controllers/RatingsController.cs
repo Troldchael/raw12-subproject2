@@ -11,14 +11,13 @@ using WebService.Models;
 
 namespace WebService.Controllers
 {
-    [ApiController]
+   /* [ApiController]
     [Route("api/ratings")]
     public class RatingsController : ControllerBase
     {
         private readonly IDataService _dataService;
         private readonly IMapper _mapper;
         private const int MaxPageSize = 25;
-
 
         public RatingsController(IDataService dataService, IMapper mapper)
         {
@@ -112,8 +111,8 @@ namespace WebService.Controllers
 
             return result;
         }
-
+*/
     }
 
 
-}
+

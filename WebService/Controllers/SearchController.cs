@@ -19,7 +19,6 @@ namespace WebService.Controllers
         private readonly IMapper _mapper;
         private const int MaxPageSize = 25;
 
-
         public SearchController(IDataService dataService, IMapper mapper)
         {
             _dataService = dataService;
