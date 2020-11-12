@@ -17,7 +17,7 @@ namespace WebService.Controllers
     {
         private readonly IDataService _dataService;
         private readonly IMapper _mapper;
-        private const int MaxPageSize = 25;
+        private const int MaxPageSize = 1;
 
 
         public UsersController(IDataService dataService, IMapper mapper)
@@ -96,14 +96,10 @@ namespace WebService.Controllers
         {
             var dto = _mapper.Map<UserElementDto>(users);
 
-            dto.Url = Url.Link(nameof(GetUser), new { users.UserId });
-
-            //dto.Url = "2";
+            dto.Url = Url.Link(nameof(GetUser), new {id = users.UserId});
 
             return dto;
         }
-
-        //Helpers
 
         private int CheckPageSize(int pageSize)
         {

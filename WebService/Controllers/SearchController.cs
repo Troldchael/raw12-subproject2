@@ -58,7 +58,7 @@ namespace WebService.Controllers
 
             var dto = _mapper.Map<SearchElementDto>(searches);
 
-            dto.Url = Url.Link(nameof(GetSearch), new { searches.UserId });
+            dto.Url = Url.Link(nameof(GetSearch), new { id = searches.UserId });
 
             //dto.Url = "2";
 

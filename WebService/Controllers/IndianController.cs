@@ -13,7 +13,7 @@ namespace WebService.Controllers
     // henrik example
 
     /*[ApiController]
-    [Route("api/products")]
+    [Route("api/indian")]
     public class ProductsController : ControllerBase
     {
         private readonly IDataService _dataService;

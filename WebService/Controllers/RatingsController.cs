@@ -11,7 +11,7 @@ using WebService.Models;
 
 namespace WebService.Controllers
 {
-   /* [ApiController]
+    [ApiController]
     [Route("api/ratings")]
     public class RatingsController : ControllerBase
     {
@@ -48,7 +48,7 @@ namespace WebService.Controllers
             }
 
             var dto = _mapper.Map<RatingElementDto>(ratings);
-            dto.Url = Url.Link(nameof(GetRating), new { id });
+            dto.Url = Url.Link(nameof(GetRating), new {id});
 
             return Ok(dto);
         }
@@ -58,7 +58,7 @@ namespace WebService.Controllers
 
             var dto = _mapper.Map<RatingElementDto>(ratings);
 
-            dto.Url = Url.Link(nameof(GetRating), new { ratings.UserId });
+            dto.Url = Url.Link(nameof(GetRating), new {id = ratings.UserId});
 
             //dto.Url = "2";
 
@@ -78,15 +78,15 @@ namespace WebService.Controllers
 
             if (page > 0)
             {
-                prev = Url.Link(nameof(GetRating), new { page = page - 1, pageSize });
+                prev = Url.Link(nameof(GetRating), new {page = page - 1, pageSize});
             }
 
             string next = null;
 
-            if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
-                next = Url.Link(nameof(GetRating), new { page = page + 1, pageSize });
+            if (page < (int) Math.Ceiling((double) count / pageSize) - 1)
+                next = Url.Link(nameof(GetRating), new {page = page + 1, pageSize});
 
-            var cur = Url.Link(nameof(GetRating), new { page, pageSize });
+            var cur = Url.Link(nameof(GetRating), new {page, pageSize});
 
             return (prev, cur, next);
         }
@@ -94,7 +94,7 @@ namespace WebService.Controllers
         private object CreateResult(int page, int pageSize, IList<RatingHistory> ratings)
         {
             var items = ratings.Select(CreateRatingElementDto);
-            
+
             var count = _dataService.NumberOfRatings();
 
             var navigationUrls = CreatePagingNavigation(page, pageSize, count);
@@ -111,8 +111,8 @@ namespace WebService.Controllers
 
             return result;
         }
-*/
-    }
 
+    }
+}
 
 
