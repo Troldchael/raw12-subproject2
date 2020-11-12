@@ -57,7 +57,7 @@ namespace WebService.Controllers
         private ActorElementDto CreateActorElementDto(Actors actors)
         {
             var dto = _mapper.Map<ActorElementDto>(actors);
-            dto.Url = Url.Link(nameof(GetActor), new { id = actors.Nconst.Trim() }); //trim to try and fix id whitespaces
+            dto.Url = Url.Link(nameof(GetActor), new { id = actors.Nconst.Trim() }); //trim to fix id whitespace in urls
 
             return dto;
         }

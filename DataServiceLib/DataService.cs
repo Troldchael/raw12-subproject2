@@ -183,7 +183,7 @@ namespace DataServiceLib.Framework
             var ctx = new Raw12Context();
             var actors = ctx.Actors;
 
-            return actors.FirstOrDefault(x => x.Nconst == id.Trim());
+            return actors.FirstOrDefault(x => x.Nconst.Trim() == id.Trim()); //tryin trim to fix id whitespace
         }
 
         public IList<Actors> GetActorInfo(int page, int pageSize)
