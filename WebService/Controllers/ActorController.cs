@@ -48,8 +48,8 @@ namespace WebService.Controllers
                 return NotFound();
             }
 
-            var dto = _mapper.Map<SearchElementDto>(actors);
-            dto.Url = Url.Link(nameof(GetActor), new { id });
+            var dto = _mapper.Map<ActorElementDto>(actors);
+            dto.Url = Url.Link(nameof(GetActor), new { ID = id.Trim() });
 
             return Ok(dto);
         }
@@ -57,7 +57,7 @@ namespace WebService.Controllers
         private ActorElementDto CreateActorElementDto(Actors actors)
         {
             var dto = _mapper.Map<ActorElementDto>(actors);
-            dto.Url = Url.Link(nameof(GetActor), new { id = actors.Nconst });
+            dto.Url = Url.Link(nameof(GetActor), new { id = actors.Nconst.Trim() }); //trim fixes id whitespaces
 
             return dto;
         }
@@ -92,7 +92,7 @@ namespace WebService.Controllers
         {
             var items = actors.Select(CreateActorElementDto);
 
-            var count = _dataService.NumberOfSearches();
+            var count = _dataService.NumberOfActors();
 
             var navigationUrls = CreatePagingNavigation(page, pageSize, count);
 

@@ -12,7 +12,7 @@ using WebService.Models;
 
 namespace WebService.Controllers
 {
-    [ApiController]
+    /*[ApiController]
     [Route("api/genres")]
     public class GenreController : ControllerBase
     {
@@ -33,7 +33,7 @@ namespace WebService.Controllers
 
         }
 
-    }
+    }*/
 
 
 }

@@ -67,10 +67,13 @@ namespace DataServiceLib
             modelBuilder.Entity<TitleBookmarking>().Property(x => x.TitleId).HasColumnName("title_id");
 
             // Movie data entities
+
+            //actors table
             modelBuilder.Entity<Actors>().ToTable("name").HasKey(x => x.Nconst);
             modelBuilder.Entity<Actors>().Property(x => x.Nconst).HasColumnName("nconst");
             modelBuilder.Entity<Actors>().Property(x => x.PrimaryName).HasColumnName("primaryname");
 
+            //movies table
             modelBuilder.Entity<Titles>().ToTable("title").HasKey(x => x.Tconst);
             modelBuilder.Entity<Titles>().Property(x => x.Tconst).HasColumnName("tconst");
             modelBuilder.Entity<Titles>().Property(x => x.PrimaryTitle).HasColumnName("primarytitle");

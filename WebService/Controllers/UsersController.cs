@@ -17,7 +17,7 @@ namespace WebService.Controllers
     {
         private readonly IDataService _dataService;
         private readonly IMapper _mapper;
-        private const int MaxPageSize = 1;
+        private const int MaxPageSize = 10;
 
 
         public UsersController(IDataService dataService, IMapper mapper)

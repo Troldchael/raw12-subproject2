@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using DataServiceLib.Framework;
+using DataServiceLib.Moviedata;
 
 namespace WebService.Models.Profiles
 {
@@ -22,6 +23,9 @@ namespace WebService.Models.Profiles
 
             //ratingmap
             CreateMap<RatingHistory, RatingElementDto>();
+
+            //actormap
+            CreateMap<Actors, ActorElementDto>();
         }
 
         

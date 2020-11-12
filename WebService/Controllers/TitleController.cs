@@ -12,7 +12,7 @@ using WebService.Models;
 
 namespace WebService.Controllers
 {
-    [ApiController]
+    /*[ApiController]
     [Route("api/details")]
     public class TitleController : ControllerBase
     {
@@ -34,6 +34,6 @@ namespace WebService.Controllers
         }
 
     }
-
+*/
 
 }
