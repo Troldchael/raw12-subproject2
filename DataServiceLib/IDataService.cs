@@ -14,7 +14,6 @@ namespace DataServiceLib
         IList<Users> GetUserInfo(int page, int pageSize);
         int NumberOfUsers();
 
-
         // search interface
         IList<SearchHistory> GetSearches();
         SearchHistory GetSearch(int id);
@@ -22,7 +21,10 @@ namespace DataServiceLib
         int NumberOfSearches();
 
         //ratings interface
+        IList<RatingHistory> GetRatings();
+        RatingHistory GetRating(int id);
+        IList<RatingHistory> GetRatingInfo(int page, int pageSize);
+        int NumberOfRatings();
 
-        
     }
 }

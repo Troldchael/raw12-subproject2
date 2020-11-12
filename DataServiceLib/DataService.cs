@@ -129,5 +129,39 @@ namespace DataServiceLib.Framework
             return SearchToList().Count;
         }
 
+
+        // ratings dataservice
+        public IList<RatingHistory> RatingsToList()
+        {
+            var ctx = new Raw12Context();
+            var ratings = ctx.RatingHistory.ToList();
+            return ratings;
+        }
+
+        public IList<RatingHistory> GetRatings()
+        {
+            return RatingsToList();
+        }
+
+        public RatingHistory GetRating(int id)
+        {
+            var ctx = new Raw12Context();
+            var ratings = ctx.RatingHistory;
+
+            return ratings.FirstOrDefault(x => x.UserId == id);
+        }
+
+        public IList<RatingHistory> GetRatingInfo(int page, int pageSize)
+        {
+            return RatingsToList()
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToList();
+        }
+
+        public int NumberOfRatings()
+        {
+            return SearchToList().Count;
+        }
     }
 }

@@ -42,13 +42,13 @@ namespace WebService.Controllers
         [HttpGet("{id}", Name = nameof(GetRating))]
         public IActionResult GetRating(int id)
         {
-            var searches = _dataService.GetRating(id);
-            if (searches == null)
+            var ratings = _dataService.GetRating(id);
+            if (ratings == null)
             {
                 return NotFound();
             }
 
-            var dto = _mapper.Map<SearchElementDto>(ratings);
+            var dto = _mapper.Map<RatingElementDto>(ratings);
             dto.Url = Url.Link(nameof(GetRating), new { id });
 
             return Ok(dto);

@@ -17,6 +17,9 @@ namespace DataServiceLib
 
         public DbSet<Users> Users { get; set; }
         public DbSet<SearchHistory> SearchHistory { get; set; }
+        public DbSet<RatingHistory> RatingHistory { get; set; }
+        public DbSet<TitleBookmarking> TitleBook { get; set; }
+        public DbSet<ActorBookmarking> ActorBook { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
