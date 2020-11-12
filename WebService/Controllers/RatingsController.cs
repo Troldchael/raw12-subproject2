@@ -12,26 +12,26 @@ using WebService.Models;
 namespace WebService.Controllers
 {
     [ApiController]
-    [Route("api/searches")]
-    public class SearchController : ControllerBase
+    [Route("api/ratings")]
+    public class RatingsController : ControllerBase
     {
         private readonly IDataService _dataService;
         private readonly IMapper _mapper;
         private const int MaxPageSize = 25;
 
 
-        public SearchController(IDataService dataService, IMapper mapper)
+        public RatingsController(IDataService dataService, IMapper mapper)
         {
             _dataService = dataService;
             _mapper = mapper;
         }
 
-        [HttpGet(Name = nameof(GetSearches))]
-        public IActionResult GetSearches(int page = 0, int pageSize = 10)
+        [HttpGet(Name = nameof(GetRatings))]
+        public IActionResult GetRatings(int page = 0, int pageSize = 10)
         {
             pageSize = CheckPageSize(pageSize);
 
-            var searches = _dataService.GetSearchInfo(page, pageSize);
+            var searches = _dataService.GetRatingInfo(page, pageSize);
 
             var result = CreateResult(page, pageSize, searches);
 
@@ -39,27 +39,27 @@ namespace WebService.Controllers
         }
 
 
-        [HttpGet("{id}", Name = nameof(GetSearch))]
-        public IActionResult GetSearch(int id)
+        [HttpGet("{id}", Name = nameof(GetRating))]
+        public IActionResult GetRating(int id)
         {
-            var searches = _dataService.GetSearch(id);
+            var searches = _dataService.GetRating(id);
             if (searches == null)
             {
                 return NotFound();
             }
 
-            var dto = _mapper.Map<SearchElementDto>(searches);
-            dto.Url = Url.Link(nameof(GetSearch), new { id });
+            var dto = _mapper.Map<SearchElementDto>(ratings);
+            dto.Url = Url.Link(nameof(GetRating), new { id });
 
             return Ok(dto);
         }
 
-        private SearchElementDto CreateSearchElementDto(SearchHistory searches)
+        private RatingElementDto CreateRatingElementDto(RatingHistory ratings)
         {
 
-            var dto = _mapper.Map<SearchElementDto>(searches);
+            var dto = _mapper.Map<RatingElementDto>(ratings);
 
-            dto.Url = Url.Link(nameof(GetSearch), new { searches.UserId });
+            dto.Url = Url.Link(nameof(GetRating), new { ratings.UserId });
 
             //dto.Url = "2";
 
@@ -79,24 +79,24 @@ namespace WebService.Controllers
 
             if (page > 0)
             {
-                prev = Url.Link(nameof(GetSearch), new { page = page - 1, pageSize });
+                prev = Url.Link(nameof(GetRating), new { page = page - 1, pageSize });
             }
 
             string next = null;
 
             if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
-                next = Url.Link(nameof(GetSearch), new { page = page + 1, pageSize });
+                next = Url.Link(nameof(GetRating), new { page = page + 1, pageSize });
 
-            var cur = Url.Link(nameof(GetSearch), new { page, pageSize });
+            var cur = Url.Link(nameof(GetRating), new { page, pageSize });
 
             return (prev, cur, next);
         }
 
-        private object CreateResult(int page, int pageSize, IList<SearchHistory> searches)
+        private object CreateResult(int page, int pageSize, IList<RatingHistory> ratings)
         {
-            var items = searches.Select(CreateSearchElementDto);
-
-            var count = _dataService.NumberOfSearches();
+            var items = ratings.Select(CreateRatingElementDto);
+            
+            var count = _dataService.NumberOfRatings();
 
             var navigationUrls = CreatePagingNavigation(page, pageSize, count);
 

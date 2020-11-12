@@ -17,11 +17,11 @@ namespace DataServiceLib
 
         // search interface
         IList<SearchHistory> GetSearches();
-        SearchHistory GetSearch(string id);
+        SearchHistory GetSearch(int id);
         IList<SearchHistory> GetSearchInfo(int page, int pageSize);
         int NumberOfSearches();
 
-        // din mors interface 
+        //ratings interface
 
         
     }

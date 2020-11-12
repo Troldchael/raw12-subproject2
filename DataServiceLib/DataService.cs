@@ -108,7 +108,7 @@ namespace DataServiceLib.Framework
             return SearchToList();
         }
 
-        public SearchHistory GetSearch(string id)
+        public SearchHistory GetSearch(int id)
         {
             var ctx = new Raw12Context();
             var searches = ctx.SearchHistory;
