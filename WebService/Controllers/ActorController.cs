@@ -49,7 +49,7 @@ namespace WebService.Controllers
             }
 
             var dto = _mapper.Map<ActorElementDto>(actors);
-            dto.Url = Url.Link(nameof(GetActor), new { ID = id.Trim() });
+            dto.Url = Url.Link(nameof(GetActor), new { id });
 
             return Ok(dto);
         }
@@ -57,7 +57,7 @@ namespace WebService.Controllers
         private ActorElementDto CreateActorElementDto(Actors actors)
         {
             var dto = _mapper.Map<ActorElementDto>(actors);
-            dto.Url = Url.Link(nameof(GetActor), new { id = actors.Nconst.Trim() }); //trim fixes id whitespaces
+            dto.Url = Url.Link(nameof(GetActor), new { id = actors.Nconst.Trim() }); //trim to try and fix id whitespaces
 
             return dto;
         }
@@ -75,15 +75,15 @@ namespace WebService.Controllers
 
             if (page > 0)
             {
-                prev = Url.Link(nameof(GetActor), new { page = page - 1, pageSize });
+                prev = Url.Link(nameof(GetActors), new { page = page - 1, pageSize });
             }
 
             string next = null;
 
             if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
-                next = Url.Link(nameof(GetActor), new { page = page + 1, pageSize });
+                next = Url.Link(nameof(GetActors), new { page = page + 1, pageSize });
 
-            var cur = Url.Link(nameof(GetActor), new { page, pageSize });
+            var cur = Url.Link(nameof(GetActors), new { page, pageSize });
 
             return (prev, cur, next);
         }
