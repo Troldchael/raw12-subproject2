@@ -10,7 +10,7 @@ using WebService.Models;
 
 namespace WebService.Controllers
 {
-    // henrik example
+    // easteregg controller maybe xD
 
     /*[ApiController]
     [Route("api/indian")]
