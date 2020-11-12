@@ -40,7 +40,7 @@ namespace WebService.Controllers
 
 
         [HttpGet("{id}", Name = nameof(GetSearch))]
-        public IActionResult GetSearch(int id)
+        public IActionResult GetSearch(string id)
         {
             var searches = _dataService.GetSearch(id);
             if (searches == null)

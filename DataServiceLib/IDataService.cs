@@ -17,7 +17,7 @@ namespace DataServiceLib
 
         // search interface
         IList<SearchHistory> GetSearches();
-        SearchHistory GetSearch(int id);
+        SearchHistory GetSearch(string id);
         IList<SearchHistory> GetSearchInfo(int page, int pageSize);
         int NumberOfSearches();
 
