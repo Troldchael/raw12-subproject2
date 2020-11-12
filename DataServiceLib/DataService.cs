@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using DataServiceLib.Moviedata;
 
 namespace DataServiceLib.Framework
 {
@@ -162,6 +163,40 @@ namespace DataServiceLib.Framework
         public int NumberOfRatings()
         {
             return SearchToList().Count;
+        }
+
+        // actors dataservice
+        public IList<Actors> ActorsToList()
+        {
+            var ctx = new Raw12Context();
+            var actors = ctx.Actors.ToList();
+            return actors;
+        }
+
+        public IList<Actors> GetActors()
+        {
+            return ActorsToList();
+        }
+
+        public Actors GetActor(string id)
+        {
+            var ctx = new Raw12Context();
+            var actors = ctx.Actors;
+
+            return actors.FirstOrDefault(x => x.Nconst == id);
+        }
+
+        public IList<Actors> GetActorInfo(int page, int pageSize)
+        {
+            return ActorsToList()
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToList();
+        }
+
+        public int NumberOfActors()
+        {
+            return ActorsToList().Count;
         }
     }
 }

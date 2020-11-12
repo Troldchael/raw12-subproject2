@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataServiceLib.Framework;
+using DataServiceLib.Moviedata;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -18,6 +19,7 @@ namespace DataServiceLib
         public DbSet<Users> Users { get; set; }
         public DbSet<SearchHistory> SearchHistory { get; set; }
         public DbSet<RatingHistory> RatingHistory { get; set; }
+        public DbSet<Actors> Actors { get; set; }
         public DbSet<TitleBookmarking> TitleBook { get; set; }
         public DbSet<ActorBookmarking> ActorBook { get; set; }
 
@@ -65,7 +67,15 @@ namespace DataServiceLib
             modelBuilder.Entity<TitleBookmarking>().Property(x => x.TitleId).HasColumnName("title_id");
 
             // Movie data entities
-            //make diz
+            modelBuilder.Entity<Actors>().ToTable("name").HasKey(x => x.Nconst);
+            modelBuilder.Entity<Actors>().Property(x => x.Nconst).HasColumnName("nconst");
+            modelBuilder.Entity<Actors>().Property(x => x.PrimaryName).HasColumnName("primaryname");
+
+            modelBuilder.Entity<Titles>().ToTable("title").HasKey(x => x.Tconst);
+            modelBuilder.Entity<Titles>().Property(x => x.Tconst).HasColumnName("tconst");
+            modelBuilder.Entity<Titles>().Property(x => x.PrimaryTitle).HasColumnName("primarytitle");
+            modelBuilder.Entity<Titles>().Property(x => x.TitleType).HasColumnName("titletype");
+
         }
     }
 

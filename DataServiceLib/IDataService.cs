@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DataServiceLib.Framework;
+using DataServiceLib.Moviedata;
 
 namespace DataServiceLib
 {
@@ -25,6 +26,12 @@ namespace DataServiceLib
         RatingHistory GetRating(int id);
         IList<RatingHistory> GetRatingInfo(int page, int pageSize);
         int NumberOfRatings();
+
+        //actors interface
+        IList<Actors> GetActors();
+        Actors GetActor(string id);
+        IList<Actors> GetActorInfo(int page, int pageSize);
+        int NumberOfActors();
 
     }
 }
