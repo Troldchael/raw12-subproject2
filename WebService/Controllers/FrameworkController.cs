@@ -391,7 +391,6 @@ namespace WebService.Controllers
 
     }
 
-    // fix title book controller
     [ApiController]
     [Route("api/titlebookings")]
     public class TitleBookController : ControllerBase
@@ -493,7 +492,6 @@ namespace WebService.Controllers
 
     }
 
-    // fix actor book controller
     [ApiController]
     [Route("api/actorbookings")]
     public class ActorBookController : ControllerBase
@@ -501,50 +499,46 @@ namespace WebService.Controllers
         private readonly IDataService _dataService;
         private readonly IMapper _mapper;
         private const int MaxPageSize = 25;
-
-
         public ActorBookController(IDataService dataService, IMapper mapper)
         {
             _dataService = dataService;
             _mapper = mapper;
         }
 
-        [HttpGet(Name = nameof(GetSearches))]
-        public IActionResult GetSearches(int page = 0, int pageSize = 10)
+        [HttpGet(Name = nameof(GetABookings))]
+        public IActionResult GetABookings(int page = 0, int pageSize = 10)
         {
             pageSize = CheckPageSize(pageSize);
 
-            var searches = _dataService.GetSearchInfo(page, pageSize);
+            var abookings = _dataService.GetABookInfo(page, pageSize);
 
-            var result = CreateResult(page, pageSize, searches);
+            var result = CreateResult(page, pageSize, abookings);
 
             return Ok(result);
         }
 
 
-        [HttpGet("{id}", Name = nameof(GetSearch))]
-        public IActionResult GetSearch(int id)
+        [HttpGet("{id}", Name = nameof(GetABooking))]
+        public IActionResult GetABooking(int id)
         {
-            var searches = _dataService.GetSearch(id);
-            if (searches == null)
+            var abookings = _dataService.GetABooking(id);
+            if (abookings == null)
             {
                 return NotFound();
             }
 
-            var dto = _mapper.Map<SearchElementDto>(searches);
-            dto.Url = Url.Link(nameof(GetSearch), new { id });
+            var dto = _mapper.Map<ABookElementDto>(abookings);
+            dto.Url = Url.Link(nameof(GetABooking), new { id });
 
             return Ok(dto);
         }
 
-        private SearchElementDto CreateSearchElementDto(SearchHistory searches)
+        private ABookElementDto createABookElementDto(ActorBookmarking abookings)
         {
 
-            var dto = _mapper.Map<SearchElementDto>(searches);
+            var dto = _mapper.Map<ABookElementDto>(abookings);
 
-            dto.Url = Url.Link(nameof(GetSearch), new { searches.UserId });
-
-            //dto.Url = "2";
+            dto.Url = Url.Link(nameof(GetABooking), new { abookings.UserId });
 
             return dto;
         }
@@ -562,24 +556,24 @@ namespace WebService.Controllers
 
             if (page > 0)
             {
-                prev = Url.Link(nameof(GetSearch), new { page = page - 1, pageSize });
+                prev = Url.Link(nameof(GetABookings), new { page = page - 1, pageSize });
             }
 
             string next = null;
 
             if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
-                next = Url.Link(nameof(GetSearch), new { page = page + 1, pageSize });
+                next = Url.Link(nameof(GetABookings), new { page = page + 1, pageSize });
 
-            var cur = Url.Link(nameof(GetSearch), new { page, pageSize });
+            var cur = Url.Link(nameof(GetABookings), new { page, pageSize });
 
             return (prev, cur, next);
         }
 
-        private object CreateResult(int page, int pageSize, IList<SearchHistory> searches)
+        private object CreateResult(int page, int pageSize, IList<ActorBookmarking> abookings)
         {
-            var items = searches.Select(CreateSearchElementDto);
+            var items = abookings.Select(createABookElementDto);
 
-            var count = _dataService.NumberOfSearches();
+            var count = _dataService.NumberOfAbookings();
 
             var navigationUrls = CreatePagingNavigation(page, pageSize, count);
 
