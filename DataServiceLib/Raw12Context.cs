@@ -27,6 +27,7 @@ namespace DataServiceLib
         public DbSet<Actors> Actors { get; set; }
         public DbSet<Movies> Movies { get; set; }
         public DbSet<Genres> Genres { get; set; }
+        public DbSet<Details> Details { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -41,7 +42,7 @@ namespace DataServiceLib
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // framework entities
+            // framework entities///////
 
             // users table 
             modelBuilder.Entity<Users>().ToTable("users").HasKey(x => x.UserId);
@@ -73,7 +74,7 @@ namespace DataServiceLib
             modelBuilder.Entity<TitleBookmarking>().Property(x => x.TitleId).HasColumnName("title_id");
 
 
-            // Movie data entities
+            // Movie data entities ////////////
 
             //actors table
             modelBuilder.Entity<Actors>().ToTable("name").HasKey(x => x.Nconst);
@@ -91,6 +92,12 @@ namespace DataServiceLib
             modelBuilder.Entity<Genres>().Property(x => x.TitleId).HasColumnName("title_id");
             modelBuilder.Entity<Genres>().Property(x => x.Genre).HasColumnName("genre");
 
+            //details table
+            modelBuilder.Entity<Details>().ToTable("details").HasKey(x => x.TitleId);
+            modelBuilder.Entity<Details>().Property(x => x.TitleId).HasColumnName("title_id");
+            modelBuilder.Entity<Details>().Property(x => x.Startyear).HasColumnName("startyear");
+            modelBuilder.Entity<Details>().Property(x => x.EndYear).HasColumnName("endyear");
+            modelBuilder.Entity<Details>().Property(x => x.RunTimeMinutes).HasColumnName("runtimeminutes");
         }
     }
 

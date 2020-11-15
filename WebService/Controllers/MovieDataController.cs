@@ -309,5 +309,102 @@ namespace WebService.Controllers
 
     }
 
+    [ApiController]
+    [Route("api/details")]
+    public class DetailController : ControllerBase
+    {
+        IDataService _dataService;
+        private readonly IMapper _mapper;
+        private const int MaxPageSize = 25;
 
+        public DetailController(IDataService dataService, IMapper mapper)
+        {
+            _dataService = dataService;
+            _mapper = mapper;
+        }
+
+        [HttpGet(Name = nameof(GetDetails))]
+        public IActionResult GetDetails(int page = 0, int pageSize = 10)
+        {
+            pageSize = CheckPageSize(pageSize);
+
+            var details = _dataService.GetDetailInfo(page, pageSize);
+
+            var result = CreateResult(page, pageSize, details);
+
+            return Ok(result);
+        }
+
+
+        [HttpGet("{id}", Name = nameof(GetDetail))]
+        public IActionResult GetDetail(string id)
+        {
+            var details = _dataService.GetDetail(id);
+            if (details == null)
+            {
+                return NotFound();
+            }
+
+            var dto = _mapper.Map<DetailDto>(details);
+            dto.Url = Url.Link(nameof(GetDetail), new { id });
+
+            return Ok(dto);
+        }
+
+        private DetailDto CreateDetailElementDto(Details details)
+        {
+            var dto = _mapper.Map<DetailDto>(details);
+            dto.Url = Url.Link(nameof(GetDetail), new { id = details.TitleId.Trim() }); //trim to fix id whitespace in urls
+
+            return dto;
+        }
+
+        //Helpers
+
+        private int CheckPageSize(int pageSize)
+        {
+            return pageSize > MaxPageSize ? MaxPageSize : pageSize;
+        }
+
+        private (string prev, string cur, string next) CreatePagingNavigation(int page, int pageSize, int count)
+        {
+            string prev = null;
+
+            if (page > 0)
+            {
+                prev = Url.Link(nameof(GetDetails), new { page = page - 1, pageSize });
+            }
+
+            string next = null;
+
+            if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
+                next = Url.Link(nameof(GetDetails), new { page = page + 1, pageSize });
+
+            var cur = Url.Link(nameof(GetDetails), new { page, pageSize });
+
+            return (prev, cur, next);
+        }
+
+        private object CreateResult(int page, int pageSize, IList<Details> details)
+        {
+            var items = details.Select(CreateDetailElementDto);
+
+            var count = _dataService.NumberOfDetails();
+
+            var navigationUrls = CreatePagingNavigation(page, pageSize, count);
+
+
+            var result = new
+            {
+                navigationUrls.prev,
+                navigationUrls.cur,
+                navigationUrls.next,
+                count,
+                items
+            };
+
+            return result;
+        }
+
+    }
 }

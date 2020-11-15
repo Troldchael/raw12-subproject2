@@ -37,14 +37,17 @@ namespace WebService.Models.Profiles
 
             //MOVIEDATA
 
-            //actormap
+            //actor map
             CreateMap<Actors, ActorDto>();
 
             //movies map
             CreateMap<Movies, MovieDto>();
 
             //genre map
-            CreateMap<Genres, GenreElementDto>();
+            CreateMap<Genres, GenreDto>();
+
+            //details map
+            CreateMap<Details, DetailDto>();
         }
 
         
