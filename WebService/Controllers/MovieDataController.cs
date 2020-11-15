@@ -138,25 +138,25 @@ namespace WebService.Controllers
         }
 
 
-        [HttpGet("{id}", Name = nameof(GetActor))]
-        public IActionResult GetActor(string id)
+        [HttpGet("{id}", Name = nameof(GetMovie))]
+        public IActionResult GetMovie(string id)
         {
-            var actors = _dataService.GetActor(id);
-            if (actors == null)
+            var movies = _dataService.GetMovie(id);
+            if (movies == null)
             {
                 return NotFound();
             }
 
-            var dto = _mapper.Map<ActorElementDto>(actors);
-            dto.Url = Url.Link(nameof(GetActor), new { id });
+            var dto = _mapper.Map<MovieElementDto>(movies);
+            dto.Url = Url.Link(nameof(GetMovie), new { id });
 
             return Ok(dto);
         }
 
-        private ActorElementDto CreateActorElementDto(Actors actors)
+        private MovieElementDto CreateMovieElementDto(Movies movies)
         {
-            var dto = _mapper.Map<ActorElementDto>(actors);
-            dto.Url = Url.Link(nameof(GetActor), new { id = actors.Nconst.Trim() }); //trim to fix id whitespace in urls
+            var dto = _mapper.Map<MovieElementDto>(movies);
+            dto.Url = Url.Link(nameof(GetMovie), new { id = movies.Tconst.Trim() }); //trim to fix id whitespace in urls
 
             return dto;
         }
@@ -174,24 +174,24 @@ namespace WebService.Controllers
 
             if (page > 0)
             {
-                prev = Url.Link(nameof(GetActors), new { page = page - 1, pageSize });
+                prev = Url.Link(nameof(GetMovies), new { page = page - 1, pageSize });
             }
 
             string next = null;
 
             if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
-                next = Url.Link(nameof(GetActors), new { page = page + 1, pageSize });
+                next = Url.Link(nameof(GetMovies), new { page = page + 1, pageSize });
 
-            var cur = Url.Link(nameof(GetActors), new { page, pageSize });
+            var cur = Url.Link(nameof(GetMovies), new { page, pageSize });
 
             return (prev, cur, next);
         }
 
-        private object CreateResult(int page, int pageSize, IList<Actors> actors)
+        private object CreateResult(int page, int pageSize, IList<Movies> movies)
         {
-            var items = actors.Select(CreateActorElementDto);
+            var items = movies.Select(CreateMovieElementDto);
 
-            var count = _dataService.NumberOfActors();
+            var count = _dataService.NumberOfMovies();
 
             var navigationUrls = CreatePagingNavigation(page, pageSize, count);
 

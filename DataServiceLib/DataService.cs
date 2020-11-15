@@ -343,7 +343,6 @@ namespace DataServiceLib.Framework
 
 
 
-
         //Movie Data dataservices ///////////////
 
         // actors dataservice
@@ -380,6 +379,39 @@ namespace DataServiceLib.Framework
             return ActorsToList().Count;
         }
 
+        // movies dataservice
+        public IList<Movies> MoviesToList()
+        {
+            var ctx = new Raw12Context();
+            var movies = ctx.Movies.ToList();
+            return movies;
+        }
+
+        public IList<Movies> GetMovies()
+        {
+            return MoviesToList();
+        }
+
+        public Movies GetMovie(string id)
+        {
+            var ctx = new Raw12Context();
+            var movies = ctx.Movies;
+
+            return movies.FirstOrDefault(x => x.Tconst.Trim() == id.Trim()); //trim to fix id whitespace
+        }
+
+        public IList<Movies> GetMovieInfo(int page, int pageSize)
+        {
+            return MoviesToList()
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToList();
+        }
+
+        public int NumberOfMovies()
+        {
+            return ActorsToList().Count;
+        }
 
     }
 }
