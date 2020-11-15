@@ -10,6 +10,8 @@ namespace DataServiceLib.Framework
 {
     public class DataService : IDataService
     {
+        // Framework Dataservices ////////
+
         // Users data service
         public IList<Users> UserToList()
         {
@@ -117,6 +119,58 @@ namespace DataServiceLib.Framework
             return searches.FirstOrDefault(x => x.UserId == id);
         }
 
+        public bool CreateSearch(SearchHistory searches)
+        {
+            var maxId = SearchToList().Max(x => x.UserId);
+            searches.UserId = maxId + 1;
+
+            var dbCat = GetSearch(searches.UserId);
+            if (dbCat == null)
+            {
+                return false;
+            }
+
+            dbCat.UserId = searches.UserId;
+            dbCat.Timestamp = searches.Timestamp;
+            dbCat.Keyword = searches.Keyword;
+
+            return true;
+        }
+
+        public bool UpdateSearch(SearchHistory searches)
+        {
+            var cont = new Raw12Context();
+
+            var dbCat = GetSearch(searches.UserId);
+            if (dbCat == null)
+            {
+                return false;
+            }
+
+            dbCat.UserId = searches.UserId;
+            dbCat.Timestamp = searches.Timestamp;
+            dbCat.Keyword = searches.Keyword;
+
+            cont.SearchHistory.Update(dbCat);
+            cont.SaveChanges();
+
+            return true;
+        }
+
+        public bool DeleteSearch(int id)
+        {
+            var cont = new Raw12Context();
+            var dbCat = GetSearch(id);
+            if (dbCat == null)
+            {
+                return false;
+            }
+
+            cont.SearchHistory.Remove(dbCat);
+            cont.SaveChanges();
+            return true;
+        }
+
         public IList<SearchHistory> GetSearchInfo(int page, int pageSize)
         {
             return SearchToList()
@@ -152,6 +206,58 @@ namespace DataServiceLib.Framework
             return ratings.FirstOrDefault(x => x.UserId == id);
         }
 
+        public bool CreateRating(RatingHistory ratings)
+        {
+            var maxId = RatingsToList().Max(x => x.UserId);
+            ratings.UserId = maxId + 1;
+
+            var dbCat = GetRating(ratings.UserId);
+            if (dbCat == null)
+            {
+                return false;
+            }
+
+            dbCat.UserId = ratings.UserId;
+            dbCat.Rating = ratings.Rating;
+            dbCat.TitleId = ratings.TitleId;
+
+            return true;
+        }
+
+        public bool UpdateRating(RatingHistory ratings)
+        {
+            var cont = new Raw12Context();
+
+            var dbCat = GetRating(ratings.UserId);
+            if (dbCat == null)
+            {
+                return false;
+            }
+
+            dbCat.UserId = ratings.UserId;
+            dbCat.Rating = ratings.Rating;
+            dbCat.TitleId = ratings.TitleId;
+
+            cont.RatingHistory.Update(dbCat);
+            cont.SaveChanges();
+
+            return true;
+        }
+
+        public bool DeleteRating(int id)
+        {
+            var cont = new Raw12Context();
+            var dbCat = GetRating(id);
+            if (dbCat == null)
+            {
+                return false;
+            }
+
+            cont.RatingHistory.Remove(dbCat);
+            cont.SaveChanges();
+            return true;
+        }
+
         public IList<RatingHistory> GetRatingInfo(int page, int pageSize)
         {
             return RatingsToList()
@@ -164,6 +270,12 @@ namespace DataServiceLib.Framework
         {
             return SearchToList().Count;
         }
+
+
+
+
+
+        //Movie Data dataservices ///////////////
 
         // actors dataservice
         public IList<Actors> ActorsToList()

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using DataServiceLib.Framework;
 using DataServiceLib.Moviedata;
 
@@ -6,7 +7,8 @@ namespace DataServiceLib
 {
     public interface IDataService
     {
-        // Framework Interfaces ////
+        // Framework Interfaces ////////
+        // for now only users, searches and ratings implement CRUD
 
         // users interface
         IList<Users> GetUsers();
@@ -17,7 +19,6 @@ namespace DataServiceLib
         IList<Users> GetUserInfo(int page, int pageSize);
         int NumberOfUsers();
 
-
         // search interface
         IList<SearchHistory> GetSearches();
         bool CreateSearch(SearchHistory searches);
@@ -27,11 +28,10 @@ namespace DataServiceLib
         IList<SearchHistory> GetSearchInfo(int page, int pageSize);
         int NumberOfSearches();
 
-
         //ratings interface
         IList<RatingHistory> GetRatings();
         bool CreateRating(RatingHistory ratings);
-        bool UpdateRating(SearchHistory ratings);
+        bool UpdateRating(RatingHistory ratings);
         bool DeleteRating(int id);
         RatingHistory GetRating(int id);
         IList<RatingHistory> GetRatingInfo(int page, int pageSize);
@@ -39,12 +39,22 @@ namespace DataServiceLib
 
         //titlebooking interface
         IList<TitleBookmarking> GetTBookings();
-        bool CreateTBooking(TitleBookmarking tbookings);
+/*        bool CreateTBooking(TitleBookmarking tbookings);
         bool UpdateTBooking(TitleBookmarking tbookings);
-        bool DeleteTBooking(int id);
+        bool DeleteTBooking(int id);*/
         TitleBookmarking GetTBooking(int id);
         IList<TitleBookmarking> GetTBookInfo(int page, int pageSize);
         int NumberOfTbookings();
+
+        //actorbooking interface
+        IList<ActorBookmarking> GetABookings();
+
+/*      bool CreateABooking(ActorBookmarking abookings);
+        bool UpdateABooking(ActorBookmarking abookings);
+        bool DeleteABooking(int id);*/
+        ActorBookmarking GetABooking(int id);
+        IList<ActorBookmarking> GetABookInfo(int page, int pageSize);
+        int NumberOfAbookings();
 
 
         //Movie Data interfaces///////////

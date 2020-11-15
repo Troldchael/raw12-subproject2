@@ -190,6 +190,43 @@ namespace WebService.Controllers
             return Ok(dto);
         }
 
+        [HttpPost]
+        public IActionResult CreateSearch(SearchForCreationOrUpdateDto searchUpdateDto)
+        {
+            var searches = _mapper.Map<SearchHistory>(searchUpdateDto);
+
+            _dataService.CreateSearch(searches);
+
+            return Created("", searches);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateSearch(int id, SearchForCreationOrUpdateDto searchUpdateDto)
+        {
+            var searches = _mapper.Map<SearchHistory>(searchUpdateDto);
+
+            searches.UserId = id; //this fixes the id null value
+
+            if (!_dataService.UpdateSearch(searches))
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteSearch(int id)
+        {
+            if (!_dataService.DeleteSearch(id))
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
+
         private SearchElementDto CreateSearchElementDto(SearchHistory searches)
         {
 
