@@ -26,6 +26,7 @@ namespace DataServiceLib
         //Moviedata
         public DbSet<Actors> Actors { get; set; }
         public DbSet<Movies> Movies { get; set; }
+        public DbSet<Genres> Genres { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

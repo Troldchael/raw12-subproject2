@@ -210,4 +210,104 @@ namespace WebService.Controllers
 
     }
 
+    [ApiController]
+    [Route("api/genres")]
+    public class GenreController : ControllerBase
+    {
+        IDataService _dataService;
+        private readonly IMapper _mapper;
+        private const int MaxPageSize = 25;
+
+        public GenreController(IDataService dataService, IMapper mapper)
+        {
+            _dataService = dataService;
+            _mapper = mapper;
+        }
+
+        [HttpGet(Name = nameof(GetGenres))]
+        public IActionResult GetGenres(int page = 0, int pageSize = 10)
+        {
+            pageSize = CheckPageSize(pageSize);
+
+            var genres = _dataService.GetGenreInfo(page, pageSize);
+
+            var result = CreateResult(page, pageSize, genres);
+
+            return Ok(result);
+        }
+
+
+        [HttpGet("{id}", Name = nameof(GetGenre))]
+        public IActionResult GetGenre(string id)
+        {
+            var genres = _dataService.GetGenre(id);
+            if (genres == null)
+            {
+                return NotFound();
+            }
+
+            var dto = _mapper.Map<GenreDto>(genres);
+            dto.Url = Url.Link(nameof(GetGenre), new { id });
+
+            return Ok(dto);
+        }
+
+        private GenreDto CreateGenreElementDto(Genres genres)
+        {
+            var dto = _mapper.Map<GenreDto>(genres);
+            dto.Url = Url.Link(nameof(GetGenre), new { id = genres.TitleId.Trim() }); //trim to fix id whitespace in urls
+
+            return dto;
+        }
+
+        //Helpers
+
+        private int CheckPageSize(int pageSize)
+        {
+            return pageSize > MaxPageSize ? MaxPageSize : pageSize;
+        }
+
+        private (string prev, string cur, string next) CreatePagingNavigation(int page, int pageSize, int count)
+        {
+            string prev = null;
+
+            if (page > 0)
+            {
+                prev = Url.Link(nameof(GetGenres), new { page = page - 1, pageSize });
+            }
+
+            string next = null;
+
+            if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
+                next = Url.Link(nameof(GetGenres), new { page = page + 1, pageSize });
+
+            var cur = Url.Link(nameof(GetGenres), new { page, pageSize });
+
+            return (prev, cur, next);
+        }
+
+        private object CreateResult(int page, int pageSize, IList<Genres> genres)
+        {
+            var items = genres.Select(CreateGenreElementDto);
+
+            var count = _dataService.NumberOfGenres();
+
+            var navigationUrls = CreatePagingNavigation(page, pageSize, count);
+
+
+            var result = new
+            {
+                navigationUrls.prev,
+                navigationUrls.cur,
+                navigationUrls.next,
+                count,
+                items
+            };
+
+            return result;
+        }
+
+    }
+
+
 }

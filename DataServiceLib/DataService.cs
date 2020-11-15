@@ -363,7 +363,7 @@ namespace DataServiceLib.Framework
             var ctx = new Raw12Context();
             var actors = ctx.Actors;
 
-            return actors.FirstOrDefault(x => x.Nconst.Trim() == id.Trim()); //tryin trim to fix id whitespace
+            return actors.FirstOrDefault(x => x.Nconst == id); 
         }
 
         public IList<Actors> GetActorInfo(int page, int pageSize)
@@ -413,5 +413,73 @@ namespace DataServiceLib.Framework
             return ActorsToList().Count;
         }
 
+        // genres dataservice
+        public IList<Genres> GenresToList()
+        {
+            var ctx = new Raw12Context();
+            var genres = ctx.Genres.ToList();
+            return genres;
+        }
+
+        public IList<Genres> GetGenres()
+        {
+            return GenresToList();
+        }
+
+        public Genres GetGenre(string id)
+        {
+            var ctx = new Raw12Context();
+            var genres = ctx.Genres;
+
+            return genres.FirstOrDefault(x => x.TitleId == id);
+        }
+
+        public IList<Genres> GetGenreInfo(int page, int pageSize)
+        {
+            return GenresToList()
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToList();
+        }
+
+        public int NumberOfGenres()
+        {
+            return GenresToList().Count;
+        }
+
+
+        // details dataservice
+        public IList<Details> DetailsToList()
+        {
+            var ctx = new Raw12Context();
+            var details = ctx.Details.ToList();
+            return details;
+        }
+
+        public IList<Details> GetDetails()
+        {
+            return DetailsToList();
+        }
+
+        public Details GetDetail(string id)
+        {
+            var ctx = new Raw12Context();
+            var details = ctx.Details;
+
+            return details.FirstOrDefault(x => x.TitleId == id);
+        }
+
+        public IList<Details> GetDetailInfo(int page, int pageSize)
+        {
+            return DetailsToList()
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToList();
+        }
+
+        public int NumberOfDetails()
+        {
+            return DetailsToList().Count;
+        }
     }
 }

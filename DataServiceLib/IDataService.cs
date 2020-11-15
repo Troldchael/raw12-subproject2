@@ -78,5 +78,11 @@ namespace DataServiceLib
         IList<Genres> GetGenreInfo(int page, int pageSize);
         int NumberOfGenres();
 
+        //details interface
+        IList<Details> GetDetails();
+        Details GetDetail(string id);
+        IList<Details> GetDetailInfo(int page, int pageSize);
+        int NumberOfDetails();
+
     }
 }
