@@ -355,7 +355,7 @@ namespace WebService.Controllers
     }
 
     // fix title book controller
-    /*[ApiController]
+    [ApiController]
     [Route("api/titlebookings")]
     public class TitleBookController : ControllerBase
     {
@@ -370,7 +370,7 @@ namespace WebService.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet(Name = nameof(GetSearches))]
+        [HttpGet(Name = nameof(GetTBookings))]
         public IActionResult GetSearches(int page = 0, int pageSize = 10)
         {
             pageSize = CheckPageSize(pageSize);
@@ -457,10 +457,10 @@ namespace WebService.Controllers
             return result;
         }
 
-    }*/
+    }
 
     // fix actor book controller
-    /*[ApiController]
+    [ApiController]
     [Route("api/actorbookings")]
     public class ActorBookController : ControllerBase
     {
@@ -562,5 +562,5 @@ namespace WebService.Controllers
             return result;
         }
 
-    }*/
+    }
 }
