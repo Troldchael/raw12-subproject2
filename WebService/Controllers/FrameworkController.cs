@@ -252,15 +252,15 @@ namespace WebService.Controllers
 
             if (page > 0)
             {
-                prev = Url.Link(nameof(GetSearch), new { page = page - 1, pageSize });
+                prev = Url.Link(nameof(GetSearches), new { page = page - 1, pageSize });
             }
 
             string next = null;
 
             if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
-                next = Url.Link(nameof(GetSearch), new { page = page + 1, pageSize });
+                next = Url.Link(nameof(GetSearches), new { page = page + 1, pageSize });
 
-            var cur = Url.Link(nameof(GetSearch), new { page, pageSize });
+            var cur = Url.Link(nameof(GetSearches), new { page, pageSize });
 
             return (prev, cur, next);
         }
@@ -355,15 +355,15 @@ namespace WebService.Controllers
 
             if (page > 0)
             {
-                prev = Url.Link(nameof(GetRating), new { page = page - 1, pageSize });
+                prev = Url.Link(nameof(GetRatings), new { page = page - 1, pageSize });
             }
 
             string next = null;
 
             if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
-                next = Url.Link(nameof(GetRating), new { page = page + 1, pageSize });
+                next = Url.Link(nameof(GetRatings), new { page = page + 1, pageSize });
 
-            var cur = Url.Link(nameof(GetRating), new { page, pageSize });
+            var cur = Url.Link(nameof(GetRatings), new { page, pageSize });
 
             return (prev, cur, next);
         }
@@ -408,41 +408,38 @@ namespace WebService.Controllers
         }
 
         [HttpGet(Name = nameof(GetTBookings))]
-        public IActionResult GetSearches(int page = 0, int pageSize = 10)
+        public IActionResult GetTBookings(int page = 0, int pageSize = 10)
         {
             pageSize = CheckPageSize(pageSize);
 
-            var searches = _dataService.GetSearchInfo(page, pageSize);
+            var tbookings = _dataService.GetTBookInfo(page, pageSize);
 
-            var result = CreateResult(page, pageSize, searches);
+            var result = CreateResult(page, pageSize, tbookings);
 
             return Ok(result);
         }
 
 
-        [HttpGet("{id}", Name = nameof(GetSearch))]
-        public IActionResult GetSearch(int id)
+        [HttpGet("{id}", Name = nameof(GetTBooking))]
+        public IActionResult GetTBooking(int id)
         {
-            var searches = _dataService.GetSearch(id);
-            if (searches == null)
+            var tbookings = _dataService.GetTBooking(id);
+            if (tbookings == null)
             {
                 return NotFound();
             }
 
-            var dto = _mapper.Map<SearchElementDto>(searches);
-            dto.Url = Url.Link(nameof(GetSearch), new { id });
+            var dto = _mapper.Map<TBookElementDto>(tbookings);
+            dto.Url = Url.Link(nameof(GetTBooking), new { id });
 
             return Ok(dto);
         }
 
-        private SearchElementDto CreateSearchElementDto(SearchHistory searches)
+        private TBookElementDto CreateTBookElementDto(TitleBookmarking tbookings)
         {
 
-            var dto = _mapper.Map<SearchElementDto>(searches);
-
-            dto.Url = Url.Link(nameof(GetSearch), new { searches.UserId });
-
-            //dto.Url = "2";
+            var dto = _mapper.Map<TBookElementDto>(tbookings);
+            dto.Url = Url.Link(nameof(GetTBooking), new { tbookings.UserId });
 
             return dto;
         }
@@ -460,24 +457,24 @@ namespace WebService.Controllers
 
             if (page > 0)
             {
-                prev = Url.Link(nameof(GetSearch), new { page = page - 1, pageSize });
+                prev = Url.Link(nameof(GetTBookings), new { page = page - 1, pageSize });
             }
 
             string next = null;
 
             if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
-                next = Url.Link(nameof(GetSearch), new { page = page + 1, pageSize });
+                next = Url.Link(nameof(GetTBookings), new { page = page + 1, pageSize });
 
-            var cur = Url.Link(nameof(GetSearch), new { page, pageSize });
+            var cur = Url.Link(nameof(GetTBookings), new { page, pageSize });
 
             return (prev, cur, next);
         }
 
-        private object CreateResult(int page, int pageSize, IList<SearchHistory> searches)
+        private object CreateResult(int page, int pageSize, IList<TitleBookmarking> tbookings)
         {
-            var items = searches.Select(CreateSearchElementDto);
+            var items = tbookings.Select(CreateTBookElementDto);
 
-            var count = _dataService.NumberOfSearches();
+            var count = _dataService.NumberOfTbookings();
 
             var navigationUrls = CreatePagingNavigation(page, pageSize, count);
 

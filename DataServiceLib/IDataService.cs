@@ -39,7 +39,8 @@ namespace DataServiceLib
 
         //titlebooking interface
         IList<TitleBookmarking> GetTBookings();
-/*        bool CreateTBooking(TitleBookmarking tbookings);
+
+/*      bool CreateTBooking(TitleBookmarking tbookings);
         bool UpdateTBooking(TitleBookmarking tbookings);
         bool DeleteTBooking(int id);*/
         TitleBookmarking GetTBooking(int id);

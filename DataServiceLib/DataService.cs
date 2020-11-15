@@ -10,7 +10,7 @@ namespace DataServiceLib.Framework
 {
     public class DataService : IDataService
     {
-        // Framework Dataservices ////////
+        // Framework Dataservice ////////
 
         // Users data service
         public IList<Users> UserToList()
@@ -271,6 +271,75 @@ namespace DataServiceLib.Framework
             return SearchToList().Count;
         }
 
+
+        // title bookings dataservice
+        public IList<TitleBookmarking> TBookToList()
+        {
+            var ctx = new Raw12Context();
+            var tbookings = ctx.TitleBook.ToList();
+            return tbookings;
+        }
+
+        public IList<TitleBookmarking> GetTBookings()
+        {
+            return TBookToList();
+        }
+
+        public TitleBookmarking GetTBooking(int id)
+        {
+            var ctx = new Raw12Context();
+            var tbookings = ctx.TitleBook;
+
+            return tbookings.FirstOrDefault(x => x.UserId == id);
+        }
+
+        public IList<TitleBookmarking> GetTBookInfo(int page, int pageSize)
+        {
+            return TBookToList()
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToList();
+        }
+
+        public int NumberOfTBookings()
+        {
+            return TBookToList().Count;
+        }
+
+
+        // tactor bookings dataservice
+        public IList<ActorBookmarking> ABookToList()
+        {
+            var ctx = new Raw12Context();
+            var abookings = ctx.ActorBook.ToList();
+            return abookings;
+        }
+
+        public IList<ActorBookmarking> GetABookings()
+        {
+            return ABookToList();
+        }
+
+        public ActorBookmarking GetABooking(int id)
+        {
+            var ctx = new Raw12Context();
+            var abookings = ctx.ActorBook;
+
+            return abookings.FirstOrDefault(x => x.UserId == id);
+        }
+
+        public IList<ActorBookmarking> GetABookInfo(int page, int pageSize)
+        {
+            return ABookToList()
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToList();
+        }
+
+        public int NumberOfABookings()
+        {
+            return ABookToList().Count;
+        }
 
 
 
