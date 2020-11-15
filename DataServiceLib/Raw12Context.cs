@@ -16,27 +16,31 @@ namespace DataServiceLib
         public static readonly ILoggerFactory MyLoggerFactory
             = LoggerFactory.Create(builder => { builder.AddConsole(); });
 
+        //framework
         public DbSet<Users> Users { get; set; }
         public DbSet<SearchHistory> SearchHistory { get; set; }
         public DbSet<RatingHistory> RatingHistory { get; set; }
-        public DbSet<Actors> Actors { get; set; }
         public DbSet<TitleBookmarking> TitleBook { get; set; }
         public DbSet<ActorBookmarking> ActorBook { get; set; }
+
+        //Moviedata
+        public DbSet<Actors> Actors { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLoggerFactory(MyLoggerFactory);
 
             // nico local database
-            optionsBuilder.UseNpgsql("host=localhost;;db=imdb;uid=postgres;pwd=Kiwikatte2");
+            //optionsBuilder.UseNpgsql("host=localhost;;db=imdb;uid=postgres;pwd=Kiwikatte2");
             
             // rawdata remote database
-            //optionsBuilder.UseNpgsql("host=rawdata.ruc.dk;port=5432;db=raw12;uid=raw12;pwd=uWISa4yb");
+            optionsBuilder.UseNpgsql("host=rawdata.ruc.dk;port=5432;db=raw12;uid=raw12;pwd=uWISa4yb");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // framework entities
+
             // users table 
             modelBuilder.Entity<Users>().ToTable("users").HasKey(x => x.UserId);
             modelBuilder.Entity<Users>().Property(x => x.UserId).HasColumnName("user_id");
@@ -65,6 +69,7 @@ namespace DataServiceLib
             modelBuilder.Entity<TitleBookmarking>().ToTable("title_bookmarking").HasKey(x => x.UserId);
             modelBuilder.Entity<TitleBookmarking>().Property(x => x.UserId).HasColumnName("user_id");
             modelBuilder.Entity<TitleBookmarking>().Property(x => x.TitleId).HasColumnName("title_id");
+
 
             // Movie data entities
 

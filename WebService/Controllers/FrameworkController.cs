@@ -330,6 +330,44 @@ namespace WebService.Controllers
             return Ok(dto);
         }
 
+
+        [HttpPost]
+        public IActionResult CreateRating(RatingForCreationOrUpdateDto ratingUpdateDto)
+        {
+            var ratings = _mapper.Map<RatingHistory>(ratingUpdateDto);
+
+            _dataService.CreateRating(ratings);
+
+            return Created("", ratings);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateRating(int id, RatingForCreationOrUpdateDto ratingUpdateDto)
+        {
+            var ratings = _mapper.Map<RatingHistory>(ratingUpdateDto);
+
+            ratings.UserId = id; //this fixes the id null value
+
+            if (!_dataService.UpdateRating(ratings))
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteRating(int id)
+        {
+            if (!_dataService.DeleteRating(id))
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
+
         private RatingElementDto CreateRatingElementDto(RatingHistory ratings)
         {
 
@@ -438,7 +476,7 @@ namespace WebService.Controllers
         {
 
             var dto = _mapper.Map<TBookElementDto>(tbookings);
-            dto.Url = Url.Link(nameof(GetTBooking), new { tbookings.UserId });
+            dto.Url = Url.Link(nameof(GetTBooking), new { id = tbookings.UserId });
 
             return dto;
         }
@@ -538,7 +576,7 @@ namespace WebService.Controllers
 
             var dto = _mapper.Map<ABookElementDto>(abookings);
 
-            dto.Url = Url.Link(nameof(GetABooking), new { abookings.UserId });
+            dto.Url = Url.Link(nameof(GetABooking), new { id = abookings.UserId });
 
             return dto;
         }
