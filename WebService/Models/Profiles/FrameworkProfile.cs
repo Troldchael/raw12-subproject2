@@ -9,9 +9,9 @@ using DataServiceLib.Moviedata;
 
 namespace WebService.Models.Profiles
 {
-    public class Raw12Profile : Profile
+    public class FrameworkProfile : Profile
     {
-        public Raw12Profile()
+        public FrameworkProfile()
         {
             //FRAMEWORK
 
@@ -34,22 +34,8 @@ namespace WebService.Models.Profiles
             //abookingmap
             CreateMap<ActorBookmarking, ABookElementDto>();
 
-
-            //MOVIEDATA
-
-            //actor map
-            CreateMap<Actors, ActorDto>();
-
-            //movies map
-            CreateMap<Movies, MovieDto>();
-
-            //genre map
-            CreateMap<Genres, GenreDto>();
-
-            //details map
-            CreateMap<Details, DetailDto>();
         }
 
-        
+
     }
 }
