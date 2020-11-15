@@ -45,7 +45,7 @@ namespace DataServiceLib
         bool DeleteTBooking(int id);*/
         TitleBookmarking GetTBooking(int id);
         IList<TitleBookmarking> GetTBookInfo(int page, int pageSize);
-        int NumberOfTbookings();
+        int NumberOfTBookings();
 
         //actorbooking interface
         IList<ActorBookmarking> GetABookings();
@@ -55,7 +55,7 @@ namespace DataServiceLib
         bool DeleteABooking(int id);*/
         ActorBookmarking GetABooking(int id);
         IList<ActorBookmarking> GetABookInfo(int page, int pageSize);
-        int NumberOfAbookings();
+        int NumberOfABookings();
 
 
         //Movie Data interfaces///////////

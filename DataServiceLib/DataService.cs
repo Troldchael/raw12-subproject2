@@ -307,7 +307,7 @@ namespace DataServiceLib.Framework
         }
 
 
-        // tactor bookings dataservice
+        // actor bookings dataservice
         public IList<ActorBookmarking> ABookToList()
         {
             var ctx = new Raw12Context();

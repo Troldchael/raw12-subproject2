@@ -13,6 +13,8 @@ namespace WebService.Models.Profiles
     {
         public Raw12Profile()
         {
+            //FRAMEWORK
+
             //usermap
             CreateMap<Users, UsersDto>();
             CreateMap<UserForCreationOrUpdateDto, Users>();
@@ -20,9 +22,20 @@ namespace WebService.Models.Profiles
 
             //searchmap
             CreateMap<SearchHistory, SearchElementDto>();
+            CreateMap<SearchForCreationOrUpdateDto, SearchHistory>();
 
             //ratingmap
             CreateMap<RatingHistory, RatingElementDto>();
+            CreateMap<RatingForCreationOrUpdateDto, RatingHistory>();
+
+            //tbooking map
+            CreateMap<TitleBookmarking, TBookElementDto>();
+
+            //abookingmap
+            CreateMap<ActorBookmarking, ABookElementDto>();
+
+
+            //MOVIEDATA
 
             //actormap
             CreateMap<Actors, ActorElementDto>();

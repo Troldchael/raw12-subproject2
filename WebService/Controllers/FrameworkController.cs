@@ -473,7 +473,7 @@ namespace WebService.Controllers
         {
             var items = tbookings.Select(CreateTBookElementDto);
 
-            var count = _dataService.NumberOfTbookings();
+            var count = _dataService.NumberOfTBookings();
 
             var navigationUrls = CreatePagingNavigation(page, pageSize, count);
 
@@ -573,7 +573,7 @@ namespace WebService.Controllers
         {
             var items = abookings.Select(createABookElementDto);
 
-            var count = _dataService.NumberOfAbookings();
+            var count = _dataService.NumberOfABookings();
 
             var navigationUrls = CreatePagingNavigation(page, pageSize, count);
 
