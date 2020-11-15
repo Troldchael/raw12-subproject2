@@ -8,7 +8,7 @@ namespace DataServiceLib
     public interface IDataService
     {
         // Framework Interfaces ////////
-        // for now only users, searches and ratings implement CRUD
+        // only users, searches and ratings implement CRUD
 
         // users interface
         IList<Users> GetUsers();
