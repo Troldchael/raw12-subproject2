@@ -1,6 +1,6 @@
 ﻿namespace DataServiceLib.Moviedata
 {
-    public class Titles
+    public class Movies
     {
         //properties
         public string Tconst { get; set; }

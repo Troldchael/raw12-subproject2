@@ -66,5 +66,11 @@ namespace DataServiceLib
         IList<Actors> GetActorInfo(int page, int pageSize);
         int NumberOfActors();
 
+        //movies interface
+        IList<Movies> GetMovies();
+        Movies GetMovie(string id);
+        IList<Movies> GetMovieInfo(int page, int pageSize);
+        int NumberOfMovies();
+
     }
 }

@@ -25,6 +25,7 @@ namespace DataServiceLib
 
         //Moviedata
         public DbSet<Actors> Actors { get; set; }
+        public DbSet<Movies> Movies { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -79,10 +80,10 @@ namespace DataServiceLib
             modelBuilder.Entity<Actors>().Property(x => x.PrimaryName).HasColumnName("primaryname");
 
             //movies table
-            modelBuilder.Entity<Titles>().ToTable("title").HasKey(x => x.Tconst);
-            modelBuilder.Entity<Titles>().Property(x => x.Tconst).HasColumnName("tconst");
-            modelBuilder.Entity<Titles>().Property(x => x.PrimaryTitle).HasColumnName("primarytitle");
-            modelBuilder.Entity<Titles>().Property(x => x.TitleType).HasColumnName("titletype");
+            modelBuilder.Entity<Movies>().ToTable("title").HasKey(x => x.Tconst);
+            modelBuilder.Entity<Movies>().Property(x => x.Tconst).HasColumnName("tconst");
+            modelBuilder.Entity<Movies>().Property(x => x.PrimaryTitle).HasColumnName("primarytitle");
+            modelBuilder.Entity<Movies>().Property(x => x.TitleType).HasColumnName("titletype");
 
         }
     }
