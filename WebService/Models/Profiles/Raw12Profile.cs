@@ -39,6 +39,9 @@ namespace WebService.Models.Profiles
 
             //actormap
             CreateMap<Actors, ActorElementDto>();
+
+            //movies map
+            CreateMap<Movies, MovieElementDto>();
         }
 
         

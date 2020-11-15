@@ -156,7 +156,7 @@ namespace WebService.Controllers
         private MovieElementDto CreateMovieElementDto(Movies movies)
         {
             var dto = _mapper.Map<MovieElementDto>(movies);
-            dto.Url = Url.Link(nameof(GetMovie), new { id = movies.Tconst.Trim() }); //trim to fix id whitespace in urls
+            dto.Url = Url.Link(nameof(GetMovie), new { id = movies.TitleId.Trim() }); //trim to fix id whitespace in urls
 
             return dto;
         }

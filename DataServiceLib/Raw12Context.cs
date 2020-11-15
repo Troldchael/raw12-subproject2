@@ -80,8 +80,8 @@ namespace DataServiceLib
             modelBuilder.Entity<Actors>().Property(x => x.PrimaryName).HasColumnName("primaryname");
 
             //movies table
-            modelBuilder.Entity<Movies>().ToTable("title").HasKey(x => x.Tconst);
-            modelBuilder.Entity<Movies>().Property(x => x.Tconst).HasColumnName("tconst");
+            modelBuilder.Entity<Movies>().ToTable("title").HasKey(x => x.TitleId);
+            modelBuilder.Entity<Movies>().Property(x => x.TitleId).HasColumnName("title_id");
             modelBuilder.Entity<Movies>().Property(x => x.PrimaryTitle).HasColumnName("primarytitle");
             modelBuilder.Entity<Movies>().Property(x => x.TitleType).HasColumnName("titletype");
 
