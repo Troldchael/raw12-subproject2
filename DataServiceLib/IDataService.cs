@@ -72,5 +72,11 @@ namespace DataServiceLib
         IList<Movies> GetMovieInfo(int page, int pageSize);
         int NumberOfMovies();
 
+        //genres interface
+        IList<Genres> GetGenres();
+        Genres GetGenre(string id);
+        IList<Genres> GetGenreInfo(int page, int pageSize);
+        int NumberOfGenres();
+
     }
 }

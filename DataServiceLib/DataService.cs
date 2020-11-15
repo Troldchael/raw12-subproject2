@@ -397,7 +397,7 @@ namespace DataServiceLib.Framework
             var ctx = new Raw12Context();
             var movies = ctx.Movies;
 
-            return movies.FirstOrDefault(x => x.Tconst.Trim() == id.Trim()); //trim to fix id whitespace
+            return movies.FirstOrDefault(x => x.TitleId.Trim() == id.Trim()); //trim to fix id whitespace
         }
 
         public IList<Movies> GetMovieInfo(int page, int pageSize)

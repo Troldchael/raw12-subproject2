@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebService.Models
 {
-    public class ActorElementDto
+    public class ActorDto
     {
         public string Nconst { get; set; }
         public string PrimaryName { get; set; }

@@ -85,6 +85,11 @@ namespace DataServiceLib
             modelBuilder.Entity<Movies>().Property(x => x.PrimaryTitle).HasColumnName("primarytitle");
             modelBuilder.Entity<Movies>().Property(x => x.TitleType).HasColumnName("titletype");
 
+            //genres table
+            modelBuilder.Entity<Genres>().ToTable("genres").HasKey(x => x.TitleId);
+            modelBuilder.Entity<Genres>().Property(x => x.TitleId).HasColumnName("title_id");
+            modelBuilder.Entity<Genres>().Property(x => x.Genre).HasColumnName("genre");
+
         }
     }
 

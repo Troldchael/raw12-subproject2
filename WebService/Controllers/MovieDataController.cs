@@ -48,15 +48,15 @@ namespace WebService.Controllers
                 return NotFound();
             }
 
-            var dto = _mapper.Map<ActorElementDto>(actors);
+            var dto = _mapper.Map<ActorDto>(actors);
             dto.Url = Url.Link(nameof(GetActor), new { id });
 
             return Ok(dto);
         }
 
-        private ActorElementDto CreateActorElementDto(Actors actors)
+        private ActorDto CreateActorElementDto(Actors actors)
         {
-            var dto = _mapper.Map<ActorElementDto>(actors);
+            var dto = _mapper.Map<ActorDto>(actors);
             dto.Url = Url.Link(nameof(GetActor), new { id = actors.Nconst.Trim() }); //trim to fix id whitespace in urls
 
             return dto;
@@ -147,15 +147,15 @@ namespace WebService.Controllers
                 return NotFound();
             }
 
-            var dto = _mapper.Map<MovieElementDto>(movies);
+            var dto = _mapper.Map<MovieDto>(movies);
             dto.Url = Url.Link(nameof(GetMovie), new { id });
 
             return Ok(dto);
         }
 
-        private MovieElementDto CreateMovieElementDto(Movies movies)
+        private MovieDto CreateMovieElementDto(Movies movies)
         {
-            var dto = _mapper.Map<MovieElementDto>(movies);
+            var dto = _mapper.Map<MovieDto>(movies);
             dto.Url = Url.Link(nameof(GetMovie), new { id = movies.TitleId.Trim() }); //trim to fix id whitespace in urls
 
             return dto;
