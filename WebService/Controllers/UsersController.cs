@@ -72,10 +72,11 @@ namespace WebService.Controllers
         {
             var users = _mapper.Map<Users>(userOrUpdateDto);
 
-            _dataService.CreateUser(users.Username, users.Password, users.Salt);
+            _dataService.CreateUser(users.Username, users.Email,  users.Password, users.Salt);
 
-            return Created("", users);
+            return Ok();
         }
+
 
         [HttpPut("{id}")]
         public IActionResult UpdateUser(int id, UserForCreationOrUpdateDto userOrUpdateDto)

@@ -11,6 +11,7 @@ namespace DataServiceLib.Framework
 {
     public class DataService : IDataService
     {
+        private List<Users> _users = Data.users;
 
         public IList<Users> UserToList()
         {
@@ -53,20 +54,18 @@ namespace DataServiceLib.Framework
             return UserToList().Count;
         }
 
-        public void CreateUser(string username, string password, string salt)
+        public Users CreateUser(string email, string username, string password, string salt)
         {
-            var users = new Users();
-
+            var user = new Users
             {
-                
-            }
-
-            dbCat.Username = Id.Username;
-            dbCat.Email = Id.Email;
-            dbCat.Password = Id.Password;
-            dbCat.Salt = Id.Salt;
-
-            return;
+                UserId = _users.Max(x => x.UserId) + 1,
+                Username = username,
+                Email = email,
+                Password = password,
+                Salt = salt
+            };
+            _users.Add(user);
+            return user;
         }
 
       

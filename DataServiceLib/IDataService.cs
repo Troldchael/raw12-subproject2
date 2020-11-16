@@ -12,7 +12,7 @@ namespace DataServiceLib
 
         IList<Users> GetUsers();
 
-        void CreateUser(string username, string password, string salt);
+        Users CreateUser(string email, string username, string password, string salt);
         bool UpdateUser(Users users);
         bool DeleteUser(int id);
         IList<Details> GetDetails();

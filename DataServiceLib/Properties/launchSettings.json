@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "IIS Express": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Users\\Mort\\source\\repos\\raw12-subproject2\\WebService\\bin\\Debug\\netcoreapp3.1"
+    }
+  }
+}
