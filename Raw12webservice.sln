@@ -7,11 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebService", "WebService\We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataServiceLib", "DataServiceLib\DataServiceLib.csproj", "{B9F5335C-8BA6-409E-A416-27ACA49E0552}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "datatest", "datatest\datatest.csproj", "{74C79E16-3F7B-4A7B-8D01-8084BB0AA8F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "datatest", "datatest\datatest.csproj", "{74C79E16-3F7B-4A7B-8D01-8084BB0AA8F2}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B9F5335C-8BA6-409E-A416-27ACA49E0552} = {B9F5335C-8BA6-409E-A416-27ACA49E0552}
 		{BF724B5F-8A36-42C0-A1DD-73551E3DA926} = {BF724B5F-8A36-42C0-A1DD-73551E3DA926}
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebServiceTests", "WebServiceTests", "{6D375DFC-3D6D-47D1-9F50-D3AE0B9419BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
