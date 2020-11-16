@@ -51,7 +51,7 @@ namespace WebService.Controllers
             }
 
             var dto = _mapper.Map<UserElementDto>(users);
-            dto.Url = Url.Link(nameof(GetUser), new { id });
+            dto.Url = Url.Link(nameof(GetUser), new { id = users.UserId });
 
             return Ok(dto);
         }

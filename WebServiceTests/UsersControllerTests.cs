@@ -28,7 +28,7 @@ namespace WebServiceTests
         public void GetUserWithValidIdShouldReturnOk()
         {
 
-            _dataServiceMock.Setup(x => x.GetUser(1)).Returns(new Users());
+            _dataServiceMock.Setup(x => x.GetUser(1)).Returns(new Users {UserId = new int()});
 
             _mapperMock.Setup(x => x.Map<UserElementDto>(It.IsAny<Users>())).Returns(new UserElementDto());
 
