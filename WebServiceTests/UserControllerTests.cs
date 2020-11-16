@@ -1,6 +1,8 @@
 using DataServiceLib;
 using Moq;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using AutoMapper;
 using DataServiceLib.Framework;
 using FluentAssertions;
@@ -11,20 +13,34 @@ using WebService.Models;
 
 namespace WebServiceTests
 {
-    public class Raw12Tests
+    public class UserControllerTests
     {
         private Mock<IDataService> _dataServiceMock;
         private Mock<IMapper> _mapperMock;
         private Mock<IUrlHelper> _urlMock;
 
-        public Raw12Tests()
+        public UserControllerTests()
         {
             _dataServiceMock = new Mock<IDataService>();
             _mapperMock = new Mock<IMapper>();
             _urlMock = new Mock<IUrlHelper>();
         }
 
-        //user tests
+        [Fact]
+        public void GetAllUsersShouldReturnOk()
+        {
+            _dataServiceMock.Setup(x => x.GetUsers()).Returns(new List<Users>()); // dunno what to return here so test failes
+
+            _mapperMock.Setup(x => x.Map<UserElementDto>(It.IsAny<Users>())).Returns(new UserElementDto());
+
+
+            var ctrl = new UsersController(_dataServiceMock.Object, _mapperMock.Object);
+
+            var response = ctrl.GetUsers(0, 10);
+
+            response.Should().BeOfType<OkObjectResult>();
+        }
+
         [Fact]
         public void GetUserWithValidIdShouldReturnOk()
         {
@@ -61,18 +77,14 @@ namespace WebServiceTests
             _dataServiceMock.Verify(x => x.CreateUser(It.IsAny<Users>()), Times.Once);
         }
 
-        // ratingstest
         [Fact]
-        public void CreateRatingShouldCallDataService()
+        public void UpdateUserShouldCallDataService()
         {
-            var ctrl = new RatingsController(_dataServiceMock.Object, _mapperMock.Object);
+            var ctrl = new UsersController(_dataServiceMock.Object, _mapperMock.Object);
 
-            ctrl.CreateRating(new RatingForCreationOrUpdateDto());
+            ctrl.UpdateUser(1, new UserForCreationOrUpdateDto());
 
-            _dataServiceMock.Verify(x => x.CreateRating(It.IsAny<RatingHistory>()), Times.Once);
+            _dataServiceMock.Verify(x => x.UpdateUser(It.IsAny<Users>()), Times.Once);
         }
-
-        // maybe an moviedata test here
-
     }
 }
