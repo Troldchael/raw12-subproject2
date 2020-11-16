@@ -27,6 +27,18 @@ namespace WebService.WebserviceTests
             _urlMock = new Mock<IUrlHelper>();
         }
 
+		[Fact]
+		public void GetUserWithValidIdShouldReturnOk()
+		{
+			//_dataServiceMock.Setup(x => x.GetUser(1).Returns(new Users());
+			
+			var ctrl = new UsersController(_dataServiceMock.Object, _mapperMock.Object);
+			
+			var response = ctrl.GetUser(1);
+			
+			response.Should().BeOfType<okObjectResult>();
+		}
+
         [Fact]
         public void CreateUserShouldCallDataService()
         {
@@ -36,5 +48,7 @@ namespace WebService.WebserviceTests
 
             _dataServiceMock.Verify(x => x.CreateUser(It.IsAny<Users>()), Times.Once);
         }
+		
+		
     }
 }
