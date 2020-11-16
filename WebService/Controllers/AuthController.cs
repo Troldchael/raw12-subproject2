@@ -9,19 +9,25 @@ using WebService.Models;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
-
+using Microsoft.Extensions.Configuration;
 
 namespace WebService.Controllers
 {
+    /*
+     * write [Authorization] over whatever needs authorization to be viewed or done
+     */
+
     [ApiController]
     [Route("api/auth")]
     public class AuthController : ControllerBase
     {
         private readonly IDataService _dataService;
+        private readonly IConfiguration _configuration;
 
-        public AuthController(IDataService dataService)
+        public AuthController(IDataService dataService, IConfiguration configuration)
         {
             _dataService = dataService;
+            _configuration = configuration;
 
         }
 
@@ -33,7 +39,12 @@ namespace WebService.Controllers
                 return BadRequest();
             }
 
-            int passwordSize = 256;
+            int.TryParse(_configuration.GetSection("Auth: PasswordSize").Value, out int passwordSize);
+
+            if (passwordSize == 0)
+            {
+                throw new ArgumentException("No password size");
+            }
             var salt = PasswordService.PasswordService.GenerateSalt(passwordSize);
             var pwd = PasswordService.PasswordService.HashPassword(dto.Password, salt, passwordSize);
 
@@ -51,11 +62,22 @@ namespace WebService.Controllers
             {
                 return BadRequest();
             }
-            int passwordSize = 256;
-            string secret = "27f7e5275ea0d7b09602c5381f78769f9cc273e7f7af1780a68c2ca84b388b50";
+
+            int.TryParse(_configuration.GetSection("Auth: PasswordSize").Value, out int passwordSize);
+
+            if (passwordSize == 0)
+            {
+                throw new ArgumentException("No password size");
+            }
+            string secret = _configuration.GetSection("Auth: secret").Value;
+
+            if (string.IsNullOrEmpty(secret))
+            {
+                throw new ArgumentException("No secret");
+            }
 
             var password = PasswordService.PasswordService.HashPassword(dto.Password, user.Salt, passwordSize);
-
+       
             if(password != user.Password)
             {
                 return BadRequest();

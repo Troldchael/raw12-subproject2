@@ -42,6 +42,8 @@ namespace WebService
 
             app.UseRouting();
 
+            app.UseJwtAuth();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
