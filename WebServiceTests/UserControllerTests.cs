@@ -86,5 +86,15 @@ namespace WebServiceTests
 
             _dataServiceMock.Verify(x => x.UpdateUser(It.IsAny<Users>()), Times.Once);
         }
+
+        [Fact]
+        public void DeleteUserShouldCallDataService()
+        {
+            var ctrl = new UsersController(_dataServiceMock.Object, _mapperMock.Object);
+
+            ctrl.DeleteUser(1);
+
+            _dataServiceMock.Verify(x => x.DeleteUser(1));
+        }
     }
 }
