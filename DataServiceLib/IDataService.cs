@@ -21,7 +21,7 @@ namespace DataServiceLib
 
         // search interface
         IList<SearchHistory> GetSearches();
-        bool CreateSearch(SearchHistory searches);
+        void CreateSearch(SearchHistory searches);
         bool UpdateSearch(SearchHistory searches);
         bool DeleteSearch(int id);
         SearchHistory GetSearch(int id);
@@ -30,7 +30,7 @@ namespace DataServiceLib
 
         //ratings interface
         IList<RatingHistory> GetRatings();
-        bool CreateRating(RatingHistory ratings);
+        void CreateRating(RatingHistory ratings);
         bool UpdateRating(RatingHistory ratings);
         bool DeleteRating(int id);
         RatingHistory GetRating(int id);

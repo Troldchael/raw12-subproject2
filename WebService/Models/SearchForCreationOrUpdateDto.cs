@@ -8,7 +8,6 @@ namespace WebService.Models
 {
     public class SearchForCreationOrUpdateDto
     {
-        public int UserId { get; set; }
         public DateTime Timestamp { get; set; }
         public string Keyword { get; set; }
     }

@@ -8,7 +8,6 @@ namespace WebService.Models
 {
     public class RatingForCreationOrUpdateDto
     {
-        public int UserId { get; set; }
         public string Rating { get; set; }
         public string TitleId { get; set; }
     }

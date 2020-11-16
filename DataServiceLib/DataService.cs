@@ -112,22 +112,15 @@ namespace DataServiceLib.Framework
             return searches.FirstOrDefault(x => x.UserId == id);
         }
 
-        public bool CreateSearch(SearchHistory searches)
+        public void CreateSearch(SearchHistory searches)
         {
+            var cont = new Raw12Context();
+
             var maxId = SearchToList().Max(x => x.UserId);
             searches.UserId = maxId + 1;
 
-            var dbCat = GetSearch(searches.UserId);
-            if (dbCat == null)
-            {
-                return false;
-            }
-
-            dbCat.UserId = searches.UserId;
-            dbCat.Timestamp = searches.Timestamp;
-            dbCat.Keyword = searches.Keyword;
-
-            return true;
+            cont.SearchHistory.Add(searches);
+            cont.SaveChanges();
         }
 
         public bool UpdateSearch(SearchHistory searches)
@@ -140,7 +133,6 @@ namespace DataServiceLib.Framework
                 return false;
             }
 
-            dbCat.UserId = searches.UserId;
             dbCat.Timestamp = searches.Timestamp;
             dbCat.Keyword = searches.Keyword;
 
@@ -199,22 +191,15 @@ namespace DataServiceLib.Framework
             return ratings.FirstOrDefault(x => x.UserId == id);
         }
 
-        public bool CreateRating(RatingHistory ratings)
+        public void CreateRating(RatingHistory ratings)
         {
+            var cont = new Raw12Context();
+
             var maxId = RatingsToList().Max(x => x.UserId);
             ratings.UserId = maxId + 1;
 
-            var dbCat = GetRating(ratings.UserId);
-            if (dbCat == null)
-            {
-                return false;
-            }
-
-            dbCat.UserId = ratings.UserId;
-            dbCat.Rating = ratings.Rating;
-            dbCat.TitleId = ratings.TitleId;
-
-            return true;
+            cont.RatingHistory.Add(ratings);
+            cont.SaveChanges();
         }
 
         public bool UpdateRating(RatingHistory ratings)
@@ -227,7 +212,6 @@ namespace DataServiceLib.Framework
                 return false;
             }
 
-            dbCat.UserId = ratings.UserId;
             dbCat.Rating = ratings.Rating;
             dbCat.TitleId = ratings.TitleId;
 
