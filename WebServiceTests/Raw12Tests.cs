@@ -11,19 +11,20 @@ using WebService.Models;
 
 namespace WebServiceTests
 {
-    public class UsersControllerTests
+    public class Raw12Tests
     {
         private Mock<IDataService> _dataServiceMock;
         private Mock<IMapper> _mapperMock;
         private Mock<IUrlHelper> _urlMock;
 
-        public UsersControllerTests()
+        public Raw12Tests()
         {
             _dataServiceMock = new Mock<IDataService>();
             _mapperMock = new Mock<IMapper>();
             _urlMock = new Mock<IUrlHelper>();
         }
 
+        //user tests
         [Fact]
         public void GetUserWithValidIdShouldReturnOk()
         {
@@ -60,6 +61,18 @@ namespace WebServiceTests
             _dataServiceMock.Verify(x => x.CreateUser(It.IsAny<Users>()), Times.Once);
         }
 
+        // ratingstest
+        [Fact]
+        public void CreateRatingShouldCallDataService()
+        {
+            var ctrl = new RatingsController(_dataServiceMock.Object, _mapperMock.Object);
+
+            ctrl.CreateRating(new RatingForCreationOrUpdateDto());
+
+            _dataServiceMock.Verify(x => x.CreateRating(It.IsAny<RatingHistory>()), Times.Once);
+        }
+
+        // maybe an moviedata test here
 
     }
 }
