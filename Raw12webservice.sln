@@ -13,10 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "datatest", "datatest\datate
 		{BF724B5F-8A36-42C0-A1DD-73551E3DA926} = {BF724B5F-8A36-42C0-A1DD-73551E3DA926}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebServiceTest", "WebServiceTest", "{6BD8176D-43A2-42A7-B46D-4F492E968418}"
-	ProjectSection(SolutionItems) = preProject
-		WebService\Class.cs = WebService\Class.cs
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServiceTests", "WebServiceTests\WebServiceTests.csproj", "{146388A8-5374-4EF6-9172-AFCB82CBBC75}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +33,10 @@ Global
 		{74C79E16-3F7B-4A7B-8D01-8084BB0AA8F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74C79E16-3F7B-4A7B-8D01-8084BB0AA8F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74C79E16-3F7B-4A7B-8D01-8084BB0AA8F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{146388A8-5374-4EF6-9172-AFCB82CBBC75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{146388A8-5374-4EF6-9172-AFCB82CBBC75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{146388A8-5374-4EF6-9172-AFCB82CBBC75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{146388A8-5374-4EF6-9172-AFCB82CBBC75}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
