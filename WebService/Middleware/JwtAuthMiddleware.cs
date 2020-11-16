@@ -40,7 +40,7 @@ namespace WebService.Middleware
             {
                 await _next(context);
                 var key = Encoding.UTF8.GetBytes(_configuration.GetSection("Auth: secret").Value);
-                var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last;
+                var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
                 var tokenHandler = new JwtSecurityTokenHandler();
 
                 tokenHandler.ValidateToken(token, new TokenValidationParameters
