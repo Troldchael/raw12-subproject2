@@ -12,7 +12,7 @@ namespace DataServiceLib
 
         // users interface
         IList<Users> GetUsers();
-        bool CreateUser(Users users);
+        void CreateUser(Users users);
         bool UpdateUser(Users users);
         bool DeleteUser(int id);
         Users GetUser(int id);

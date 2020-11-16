@@ -46,27 +46,15 @@ namespace DataServiceLib.Framework
             return UserToList().Count;
         }
 
-        public bool CreateUser(Users users)
+        public void CreateUser(Users users)
         {
+            var cont = new Raw12Context();
+
             var maxId = UserToList().Max(x => x.UserId);
             users.UserId = maxId + 1;
 
-            var cont = new Raw12Context();
-
-            var dbCat = GetUser(users.UserId);
-            if (dbCat == null)
-            {
-                return false;
-            }
-
-            dbCat.Username = users.Username;
-            dbCat.Email = users.Email;
-            dbCat.Password = users.Password;
-
-            cont.Users.Add(dbCat);
+            cont.Users.Add(users);
             cont.SaveChanges();
-
-            return true;
         }
 
         public bool UpdateUser(Users users)
