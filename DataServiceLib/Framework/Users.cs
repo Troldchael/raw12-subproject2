@@ -8,6 +8,7 @@ namespace DataServiceLib.Framework
 {
     public class Users
     {
+        public static List<Users> users { get; set; }
         //properties
         public int UserId { get; set; }
         public string Username { get; set; }

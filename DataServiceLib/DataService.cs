@@ -11,7 +11,7 @@ namespace DataServiceLib.Framework
 {
     public class DataService : IDataService
     {
-        private List<Users> _users = Data.users;
+        private List<Users> _users = Users.users;
 
         public IList<Users> UserToList()
         {
