@@ -28,7 +28,7 @@ namespace WebServiceTests
         public void GetUserWithValidIdShouldReturnOk()
         {
 
-            _dataServiceMock.Setup(x => x.GetUser(1)).Returns(new Users {UserId = new int()}); // dunno what to return here so test failes, even though it should pass
+            _dataServiceMock.Setup(x => x.GetUser(1)).Returns(new Users { UserId = new int() }); // dunno what to return here so test failes, even though it should pass
 
             _mapperMock.Setup(x => x.Map<UserElementDto>(It.IsAny<Users>())).Returns(new UserElementDto());
 
@@ -40,6 +40,17 @@ namespace WebServiceTests
         }
 
         [Fact]
+        public void GetUserWithInvalidIdShouldReturnNotFound()
+        {
+
+            var ctrl = new UsersController(_dataServiceMock.Object, null);
+
+            var response = ctrl.GetUser(1221);
+
+            response.Should().BeOfType<NotFoundResult>();
+        }
+
+        [Fact]
         public void CreateUserShouldCallDataService()
         {
             var ctrl = new UsersController(_dataServiceMock.Object, _mapperMock.Object);
@@ -48,5 +59,7 @@ namespace WebServiceTests
 
             _dataServiceMock.Verify(x => x.CreateUser(It.IsAny<Users>()), Times.Once);
         }
+
+
     }
 }
