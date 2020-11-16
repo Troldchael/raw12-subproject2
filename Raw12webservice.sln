@@ -13,7 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "datatest", "datatest\datate
 		{BF724B5F-8A36-42C0-A1DD-73551E3DA926} = {BF724B5F-8A36-42C0-A1DD-73551E3DA926}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebServiceTests", "WebServiceTests", "{6D375DFC-3D6D-47D1-9F50-D3AE0B9419BF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebServiceTest", "WebServiceTest", "{6BD8176D-43A2-42A7-B46D-4F492E968418}"
+	ProjectSection(SolutionItems) = preProject
+		WebService\Class.cs = WebService\Class.cs
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
