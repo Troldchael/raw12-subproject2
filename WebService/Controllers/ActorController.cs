@@ -9,6 +9,7 @@ using DataServiceLib.Framework;
 using DataServiceLib.Moviedata;
 using Microsoft.AspNetCore.Mvc;
 using WebService.Models;
+using WebService.Attributes;
 
 namespace WebService.Controllers
 {
@@ -25,6 +26,7 @@ namespace WebService.Controllers
             _mapper = mapper;
         }
 
+        [Authorization]
         [HttpGet]
         public IActionResult GetActors()
         {

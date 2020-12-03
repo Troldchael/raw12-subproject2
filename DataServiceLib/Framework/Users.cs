@@ -10,11 +10,11 @@ namespace DataServiceLib.Framework
     {
         public static List<Users> users { get; set; }
         //properties
-        public int UserId { get; set; }
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string Salt { get; set; }
+        public int user_id { get; set; }
+        public string username { get; set; }
+        public string email { get; set; }
+        public string password { get; set; }
+        public string salt { get; set; }
 
         //navigation properties
         //dont think its needed in users

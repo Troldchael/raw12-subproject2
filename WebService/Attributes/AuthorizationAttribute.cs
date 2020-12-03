@@ -12,7 +12,7 @@ namespace WebService.Attributes
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            var user = context.HttpContext.Items["user"];
+            var user = context.HttpContext.Items["User"];
             if (user == null)
             {
                 context.Result = new UnauthorizedResult();

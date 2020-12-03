@@ -9,10 +9,9 @@ namespace DataServiceLib
 {
     public interface IDataService
     {
-
         IList<Users> GetUsers();
 
-        Users CreateUser(string email, string username, string password, string salt);
+        Users CreateUser(string email, string username, string password = null, string salt = null);
         bool UpdateUser(Users users);
         bool DeleteUser(int id);
         IList<Details> GetDetails();
@@ -30,12 +29,13 @@ namespace DataServiceLib
         bool UpdateCategory(Category category);
         bool DeleteCategory(int id);*/
 
-        Users GetUserId(int id);
+        Users GetUser(int id);
 
-        Users GetUserName(String userName);
+        Users GetUser(String userName);
 
         IList<Users> GetUserInfo(int page, int pageSize);
        
         int NumberOfUsers();
+        
     }
 }

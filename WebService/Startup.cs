@@ -40,9 +40,11 @@ namespace WebService
 
             app.UseRequestLogging();
 
+            app.UseJwtAuth();
+
             app.UseRouting();
 
-            app.UseJwtAuth();
+
 
             app.UseEndpoints(endpoints =>
             {

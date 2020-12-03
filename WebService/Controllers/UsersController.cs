@@ -31,13 +31,13 @@ namespace WebService.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+     /*   [HttpGet]
         public IActionResult GetUsers()
         {
             var users = _dataService.GetUsers();
             return Ok(_mapper.Map<IEnumerable<UsersDto>>(users));
 
-        }
+        }*/
             [HttpGet(Name = nameof(GetUsers))]
         public IActionResult GetUsers(int page = 0, int pageSize = 10)
         {
@@ -54,7 +54,7 @@ namespace WebService.Controllers
         [HttpGet("{id}", Name = nameof(GetUser))]
             public IActionResult GetUser(int id)
         {
-            var users = _dataService.GetUserId(id);
+            var users = _dataService.GetUser(id);
             if (users == null)
             {
                 return NotFound();
@@ -67,17 +67,17 @@ namespace WebService.Controllers
         }
 
 
-        [HttpPost]
-        public IActionResult CreateUsers(UserForCreationOrUpdateDto userOrUpdateDto)
+    /*    [HttpPost]
+        public IActionResult CreateUsers(RegisterDto regDto)
         {
-            var users = _mapper.Map<Users>(userOrUpdateDto);
+            var users = _mapper.Map<Users>(regDto);
 
-            _dataService.CreateUser(users.Username, users.Email,  users.Password, users.Salt);
+            _dataService.CreateUser(regDto.Email, regDto.Username, regDto.Password);
 
-            return Ok();
+            return Created("", users);
         }
-
-
+    */
+        
         [HttpPut("{id}")]
         public IActionResult UpdateUser(int id, UserForCreationOrUpdateDto userOrUpdateDto)
         {
@@ -106,7 +106,7 @@ namespace WebService.Controllers
         private UserElementDto CreateUserElementDto(Users users)
         {
             var dto = _mapper.Map<UserElementDto>(users);
-            dto.Url = Url.Link(nameof(GetUser), new { users.UserId });
+            dto.Url = Url.Link(nameof(GetUser), new { users.user_id });
             return dto;
         }
 

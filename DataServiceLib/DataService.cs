@@ -11,8 +11,6 @@ namespace DataServiceLib.Framework
 {
     public class DataService : IDataService
     {
-        private List<Users> _users = Users.users;
-
         public IList<Users> UserToList()
         {
             var ctx = new Raw12Context();
@@ -31,14 +29,14 @@ namespace DataServiceLib.Framework
         }
 
 
-        public Users GetUserId(int id)
+        public Users GetUser(int id)
         {
-            return UserToList().FirstOrDefault(x => x.UserId == id);
+            return UserToList().FirstOrDefault(x => x.user_id == id);
         }
 
-        public Users GetUserName(string username)
+        public Users GetUser(string username)
         {
-            return UserToList().FirstOrDefault(x => x.Username == username);
+            return UserToList().FirstOrDefault(x => x.username == username);
         }
 
         public IList<Users> GetUserInfo(int page, int pageSize)
@@ -53,38 +51,41 @@ namespace DataServiceLib.Framework
         {
             return UserToList().Count;
         }
-
+       
         public Users CreateUser(string email, string username, string password, string salt)
         {
-            var user = new Users
-            {
-                UserId = _users.Max(x => x.UserId) + 1,
-                Username = username,
-                Email = email,
-                Password = password,
-                Salt = salt
-            };
-            _users.Add(user);
-            return user;
+            var cont = new Raw12Context();
+          
+            var newUser = new Users {
+                user_id = cont.Users.Max(x => x.user_id) + 1,
+                username = username,
+                password = password, 
+                email = email,
+                salt = salt
+
+        };
+            cont.Users.Add(newUser);
+            cont.SaveChanges();
+            return newUser;
         }
 
       
         public bool UpdateUser(Users users, int id)
         {
-            var dbCat = GetUserId(id);
+            var dbCat = GetUser(id);
             if (dbCat == null)
             {
                 return false;
             }
-            dbCat.Username = users.Username;
-            dbCat.Email = users.Email;
-            dbCat.Password = users.Password;
+            dbCat.username = users.username;
+            dbCat.email = users.email;
+            dbCat.password = users.password;
             return true;
         }
 
         public bool DeleteUser(int id)
         {
-            var dbCat = GetUserId(id);
+            var dbCat = GetUser(id);
             if (dbCat == null)
             {
                 return false;
@@ -93,15 +94,13 @@ namespace DataServiceLib.Framework
             return true;
         }
 
-        private List<Details> _details = new List<Details>();
-
         public IList<Details> GetDetails()
         {
             var ctx = new Raw12Context();
             return ctx.Details.ToList();
         }
 
-        private List<Actors> _actors = new List<Actors>();
+        private  readonly List<Actors> _actors = new List<Actors>();
 
         public IList<Actors> GetActors()
         {
@@ -109,16 +108,13 @@ namespace DataServiceLib.Framework
             return ctx.Actors.ToList();
         }
 
-        private List<Genres> _genres = new List<Genres>();
-
         public IList<Genres> GetGenres()
         {
             var ctx = new Raw12Context();
             return ctx.Genres.ToList();
         }
 
-        private List<Ratings> _ratings = new List<Ratings>();
-
+       
         public IList<Ratings> GetRatings()
         {
             var ctx = new Raw12Context();

@@ -31,25 +31,25 @@ namespace DataServiceLib
         {
             optionsBuilder.UseLoggerFactory(MyLoggerFactory);
 
-            optionsBuilder.UseNpgsql("host=localhost;;db=imdb;uid=postgres;pwd=Kiwikatte2");
+            //optionsBuilder.UseNpgsql("host=localhost;db=imdb;uid=postgres;pwd=Morten23801701#");
 
-            optionsBuilder.UseNpgsql("host=localhost;;db=imdb.2;uid=postgres;pwd=1234");
+            //optionsBuilder.UseNpgsql("host=localhost;;db=imdb.2;uid=postgres;pwd=1234");
 
 
             // rawdata raw12 server
-            //optionsBuilder.UseNpgsql("host=rawdata.ruc.dk;port=5432;db=raw12;uid=raw12;pwd=uWISa4yb");
+            optionsBuilder.UseNpgsql("host=rawdata.ruc.dk;port=5432;db=raw12;uid=raw12;pwd=uWISa4yb");
 
-            optionsBuilder.UseNpgsql("host=localhost;db=IMDB;uid=postgres;pwd=KaffeKop+1");
+            //optionsBuilder.UseNpgsql("host=localhost;db=IMDB;uid=postgres;pwd=KaffeKop+1");
 
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Users>().ToTable("users").HasKey(x => x.UserId);
-            modelBuilder.Entity<Users>().Property(x => x.UserId).HasColumnName("user_id");
-            modelBuilder.Entity<Users>().Property(x => x.Username).HasColumnName("username");
-            modelBuilder.Entity<Users>().Property(x => x.Email).HasColumnName("email");
-            modelBuilder.Entity<Users>().Property(x => x.Password).HasColumnName("password");
+            modelBuilder.Entity<Users>().ToTable("users").HasKey(x => x.user_id);
+            modelBuilder.Entity<Users>().Property(x => x.user_id).HasColumnName("user_id");
+            modelBuilder.Entity<Users>().Property(x => x.username).HasColumnName("username");
+            modelBuilder.Entity<Users>().Property(x => x.email).HasColumnName("email");
+            modelBuilder.Entity<Users>().Property(x => x.password).HasColumnName("password");
 
             modelBuilder.Entity<Details>().ToTable("title").HasKey(x => x.Tconst);
             modelBuilder.Entity<Details>().Property(x => x.Tconst).HasColumnName("tconst");

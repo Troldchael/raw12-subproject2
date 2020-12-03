@@ -2,23 +2,20 @@
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using DataServiceLib;
 using Microsoft.AspNetCore.Mvc;
-using WebService.Models;
-using System.Text;
-using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using WebService.Models;
+using WebService.PasswordService;
 
-namespace WebService.Controllers
+namespace AuthController.Controllers
 {
-    /*
-     * write [Authorization] over whatever needs authorization to be viewed or done
-     */
-
     [ApiController]
-    [Route("api/auth")]
+    [Route("api/auth/users")]
     public class AuthController : ControllerBase
     {
         private readonly IDataService _dataService;
@@ -28,78 +25,79 @@ namespace WebService.Controllers
         {
             _dataService = dataService;
             _configuration = configuration;
-
         }
 
         [HttpPost("register")]
         public IActionResult Register(RegisterDto dto)
         {
-            if (_dataService.GetUserName(dto.Username) != null)
+            if (_dataService.GetUser(dto.Username) != null)
             {
                 return BadRequest();
             }
 
-            int.TryParse(_configuration.GetSection("Auth: PasswordSize").Value, out int passwordSize);
-
-            if (passwordSize == 0)
+            int.TryParse(_configuration.GetSection("Auth:PasswordSize").Value, out int pwdSize);
+            pwdSize = 1;
+            if (pwdSize == 0)
             {
                 throw new ArgumentException("No password size");
             }
-            var salt = PasswordService.PasswordService.GenerateSalt(passwordSize);
-            var pwd = PasswordService.PasswordService.HashPassword(dto.Password, salt, passwordSize);
 
-            _dataService.CreateUser(dto.Username, dto.Email,  pwd, salt);
+            var salt = PasswordService.GenerateSalt(pwdSize);
+            var pwd = PasswordService.HashPassword(dto.Password, salt, pwdSize);
 
+            var user = _dataService.CreateUser(dto.Email, dto.Username, pwd, salt);
 
-            return CreatedAtRoute(null, new { dto.Username}); 
+            return CreatedAtRoute(null, new { dto.Username });
+
         }
 
         [HttpPost("login")]
         public IActionResult Login(LoginDto dto)
         {
-            var user = _dataService.GetUserName(dto.Username);
+            var user = _dataService.GetUser(dto.Username);
             if (user == null)
             {
                 return BadRequest();
             }
+            int pwdSize = user.password.Length;
+//            string pwdSize = _configuration.GetSection("Auth:PasswordSize").Value;
 
-            int.TryParse(_configuration.GetSection("Auth: PasswordSize").Value, out int passwordSize);
-
-            if (passwordSize == 0)
+            if (pwdSize == 0)
             {
                 throw new ArgumentException("No password size");
             }
-            string secret = _configuration.GetSection("Auth: secret").Value;
 
+            string secret = _configuration.GetSection("Auth:Secret").Value;
             if (string.IsNullOrEmpty(secret))
             {
                 throw new ArgumentException("No secret");
             }
 
-            var password = PasswordService.PasswordService.HashPassword(dto.Password, user.Salt, passwordSize);
-       
-            if(password != user.Password)
+            var password = PasswordService.HashPassword(dto.Password, user.salt, pwdSize);
+
+            if (password != user.password)
             {
                 return BadRequest();
             }
+
             var tokenHandler = new JwtSecurityTokenHandler();
+
             var key = Encoding.UTF8.GetBytes(secret);
 
-
-            var tokenDesription = new SecurityTokenDescriptor
+            var tokenDescription = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[] { new Claim("id", user.UserId.ToString()) }),
-                Expires = DateTime.Now.AddSeconds(45), 
+                Subject = new ClaimsIdentity(new[] { new Claim("id", user.user_id.ToString()) }),
+                Expires = DateTime.Now.AddSeconds(45),
                 SigningCredentials = new SigningCredentials(
-                    new SymmetricSecurityKey(key), 
+                    new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature)
             };
 
-            var securityToken = tokenHandler.CreateToken(tokenDesription);
+            var securityToken = tokenHandler.CreateToken(tokenDescription);
             var token = tokenHandler.WriteToken(securityToken);
 
-
-            return Ok(new { dto.Username, token});
+            return Ok(new { dto.Username, token });
         }
+
     }
 }
