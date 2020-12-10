@@ -13,7 +13,7 @@ namespace WebService.Models.Profiles
         public UsersProfile()
         {
             CreateMap<Users, UsersDto>();
-            CreateMap<UserForCreationOrUpdateDto, Users>();
+            CreateMap<UserUpdateDto, Users>();
             CreateMap<Users, UserElementDto>();
 
             //use to add from other tables to dto

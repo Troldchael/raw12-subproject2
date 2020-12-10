@@ -36,7 +36,8 @@ namespace AuthController.Controllers
             }
 
             int.TryParse(_configuration.GetSection("Auth:PasswordSize").Value, out int pwdSize);
-            pwdSize = 1;
+            
+
             if (pwdSize == 0)
             {
                 throw new ArgumentException("No password size");
@@ -55,12 +56,14 @@ namespace AuthController.Controllers
         public IActionResult Login(LoginDto dto)
         {
             var user = _dataService.GetUser(dto.Username);
+            
+
             if (user == null)
             {
                 return BadRequest();
             }
-            int pwdSize = user.password.Length;
-//            string pwdSize = _configuration.GetSection("Auth:PasswordSize").Value;
+
+            int.TryParse(_configuration.GetSection("Auth:PasswordSize").Value, out int pwdSize);
 
             if (pwdSize == 0)
             {

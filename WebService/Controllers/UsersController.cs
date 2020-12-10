@@ -54,7 +54,7 @@ namespace WebService.Controllers
         [HttpGet("{id}", Name = nameof(GetUser))]
             public IActionResult GetUser(int id)
         {
-            var users = _dataService.GetUser(id);
+            var users = _dataService.GetUserId(id);
             if (users == null)
             {
                 return NotFound();
@@ -79,7 +79,7 @@ namespace WebService.Controllers
     */
         
         [HttpPut("{id}")]
-        public IActionResult UpdateUser(int id, UserForCreationOrUpdateDto userOrUpdateDto)
+        public IActionResult UpdateUser(int id, UserUpdateDto userOrUpdateDto)
         {
             var users = _mapper.Map<Users>(userOrUpdateDto);
 

@@ -29,9 +29,9 @@ namespace DataServiceLib
         bool UpdateCategory(Category category);
         bool DeleteCategory(int id);*/
 
-        Users GetUser(int id);
+        Users GetUserId(int id);
 
-        Users GetUser(String userName);
+        Users GetUser(String username);
 
         IList<Users> GetUserInfo(int page, int pageSize);
        

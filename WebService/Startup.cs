@@ -36,13 +36,18 @@ namespace WebService
                 app.UseDeveloperExceptionPage();
             }
 
-            // app.UseMiddleware<RequestLoggerMiddleware>();
+             app.UseMiddleware<RequestLoggerMiddleware>();
 
             app.UseRequestLogging();
 
             app.UseJwtAuth();
 
             app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
 
 

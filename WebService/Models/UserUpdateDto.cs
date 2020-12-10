@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebService.Models
 {
-    public class UserForCreationOrUpdateDto
+    public class UserUpdateDto
     {
         public string UserId { get; set; }
         public string Username { get; set; }

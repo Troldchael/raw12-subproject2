@@ -29,7 +29,7 @@ namespace DataServiceLib.Framework
         }
 
 
-        public Users GetUser(int id)
+        public Users GetUserId(int id)
         {
             return UserToList().FirstOrDefault(x => x.user_id == id);
         }
@@ -64,15 +64,15 @@ namespace DataServiceLib.Framework
                 salt = salt
 
         };
+            
             cont.Users.Add(newUser);
-            cont.SaveChanges();
             return newUser;
         }
 
       
         public bool UpdateUser(Users users, int id)
         {
-            var dbCat = GetUser(id);
+            var dbCat = GetUserId(id);
             if (dbCat == null)
             {
                 return false;
@@ -85,7 +85,7 @@ namespace DataServiceLib.Framework
 
         public bool DeleteUser(int id)
         {
-            var dbCat = GetUser(id);
+            var dbCat = GetUserId(id);
             if (dbCat == null)
             {
                 return false;
