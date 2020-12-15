@@ -39,7 +39,7 @@ namespace WebService.Middleware
             try
             {
                 await _next(context);
-                var key = Encoding.UTF8.GetBytes(_configuration.GetSection("Auth: secret").Value);
+                var key = Encoding.UTF8.GetBytes(_configuration.GetSection("Auth:secret").Value);
                 var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
                 var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -57,10 +57,12 @@ namespace WebService.Middleware
                 if (claim != null)
                 {
                     int.TryParse(claim.Value.ToString(), out var id);
-                    context.Items["user"] = _dataService.GetUserId(id);
+                    context.Items["User"] = _dataService.GetUser(id);
                 }
             }
             catch {}
+
+            await _next(context);
         }
     }
 }

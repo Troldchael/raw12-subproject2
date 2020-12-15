@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using DataServiceLib;
-
 using DataServiceLib.Framework;
 using Microsoft.AspNetCore.Mvc;
 using WebService.Models;
+using WebService.Attributes;
 
 namespace WebService.Controllers
 {
@@ -31,13 +31,13 @@ namespace WebService.Controllers
             _mapper = mapper;
         }
 
-     /*   [HttpGet]
+        [HttpGet]
         public IActionResult GetUsers()
         {
             var users = _dataService.GetUsers();
             return Ok(_mapper.Map<IEnumerable<UsersDto>>(users));
 
-        }*/
+        }
             [HttpGet(Name = nameof(GetUsers))]
         public IActionResult GetUsers(int page = 0, int pageSize = 10)
         {
@@ -51,33 +51,23 @@ namespace WebService.Controllers
         }
 
 
-        [HttpGet("{id}", Name = nameof(GetUser))]
-            public IActionResult GetUser(int id)
+        [HttpGet("{id}", Name = nameof(GetUserId))]
+        public IActionResult GetUserId(int id)
         {
-            var users = _dataService.GetUserId(id);
+            var users = _dataService.GetUser(id);
             if (users == null)
             {
                 return NotFound();
             }
 
             var dto = _mapper.Map<UserElementDto>(users);
-            dto.Url = Url.Link(nameof(GetUser), new { id });
+            dto.Url = Url.Link(nameof(GetUserId), new { id });
 
             return Ok(dto);
         }
 
 
-    /*    [HttpPost]
-        public IActionResult CreateUsers(RegisterDto regDto)
-        {
-            var users = _mapper.Map<Users>(regDto);
-
-            _dataService.CreateUser(regDto.Email, regDto.Username, regDto.Password);
-
-            return Created("", users);
-        }
-    */
-        
+        [Authorization]
         [HttpPut("{id}")]
         public IActionResult UpdateUser(int id, UserUpdateDto userOrUpdateDto)
         {
@@ -92,6 +82,7 @@ namespace WebService.Controllers
 
         }
 
+        [Authorization]
         [HttpDelete("{id}")]
         public IActionResult DeleteUser(int id)
         {
@@ -106,7 +97,7 @@ namespace WebService.Controllers
         private UserElementDto CreateUserElementDto(Users users)
         {
             var dto = _mapper.Map<UserElementDto>(users);
-            dto.Url = Url.Link(nameof(GetUser), new { users.user_id });
+            dto.Url = Url.Link(nameof(GetUserId), new { users.user_id });
             return dto;
         }
 

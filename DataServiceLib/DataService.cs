@@ -29,14 +29,15 @@ namespace DataServiceLib.Framework
         }
 
 
-        public Users GetUserId(int id)
+        public Users GetUser(int id)
         {
             return UserToList().FirstOrDefault(x => x.user_id == id);
         }
 
         public Users GetUser(string username)
         {
-            return UserToList().FirstOrDefault(x => x.username == username);
+            var conn = new Raw12Context();
+            return conn.Users.FirstOrDefault(x => x.username == username);
         }
 
         public IList<Users> GetUserInfo(int page, int pageSize)
@@ -54,10 +55,10 @@ namespace DataServiceLib.Framework
        
         public Users CreateUser(string email, string username, string password, string salt)
         {
-            var cont = new Raw12Context();
+            var conn = new Raw12Context();
           
             var newUser = new Users {
-                user_id = cont.Users.Max(x => x.user_id) + 1,
+                user_id = conn.Users.Max(x => x.user_id) + 1,
                 username = username,
                 password = password, 
                 email = email,
@@ -65,14 +66,14 @@ namespace DataServiceLib.Framework
 
         };
             
-            cont.Users.Add(newUser);
+            conn.Users.Add(newUser);
             return newUser;
         }
 
       
         public bool UpdateUser(Users users, int id)
         {
-            var dbCat = GetUserId(id);
+            var dbCat = GetUser(id);
             if (dbCat == null)
             {
                 return false;
@@ -83,9 +84,10 @@ namespace DataServiceLib.Framework
             return true;
         }
 
+        
         public bool DeleteUser(int id)
         {
-            var dbCat = GetUserId(id);
+            var dbCat = GetUser(id);
             if (dbCat == null)
             {
                 return false;
@@ -99,8 +101,6 @@ namespace DataServiceLib.Framework
             var ctx = new Raw12Context();
             return ctx.Details.ToList();
         }
-
-        private  readonly List<Actors> _actors = new List<Actors>();
 
         public IList<Actors> GetActors()
         {

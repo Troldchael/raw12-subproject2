@@ -24,12 +24,7 @@ namespace DataServiceLib
 
 
 
-        /*Category GetCategory(int id);
-        void CreateCategory(Category category);
-        bool UpdateCategory(Category category);
-        bool DeleteCategory(int id);*/
-
-        Users GetUserId(int id);
+        Users GetUser(int id);
 
         Users GetUser(String username);
 

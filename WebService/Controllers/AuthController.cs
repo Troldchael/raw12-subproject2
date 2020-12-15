@@ -45,8 +45,7 @@ namespace AuthController.Controllers
 
             var salt = PasswordService.GenerateSalt(pwdSize);
             var pwd = PasswordService.HashPassword(dto.Password, salt, pwdSize);
-
-            var user = _dataService.CreateUser(dto.Email, dto.Username, pwd, salt);
+            _dataService.CreateUser(dto.Email, dto.Username, pwd, salt);
 
             return CreatedAtRoute(null, new { dto.Username });
 
@@ -56,8 +55,6 @@ namespace AuthController.Controllers
         public IActionResult Login(LoginDto dto)
         {
             var user = _dataService.GetUser(dto.Username);
-            
-
             if (user == null)
             {
                 return BadRequest();
