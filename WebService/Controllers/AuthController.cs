@@ -36,8 +36,6 @@ namespace AuthController.Controllers
             }
 
             int.TryParse(_configuration.GetSection("Auth:PasswordSize").Value, out int pwdSize);
-            
-
             if (pwdSize == 0)
             {
                 throw new ArgumentException("No password size");
@@ -59,7 +57,7 @@ namespace AuthController.Controllers
             {
                 return BadRequest();
             }
-
+            
             int.TryParse(_configuration.GetSection("Auth:PasswordSize").Value, out int pwdSize);
 
             if (pwdSize == 0)

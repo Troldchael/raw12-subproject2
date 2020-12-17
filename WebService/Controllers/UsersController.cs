@@ -69,7 +69,7 @@ namespace WebService.Controllers
 
         [Authorization]
         [HttpPut("{id}")]
-        public IActionResult UpdateUser(int id, UserUpdateDto userOrUpdateDto)
+        public IActionResult UpdateUser(int id, UserForCreationOrUpdateDto userOrUpdateDto)
         {
             var users = _mapper.Map<Users>(userOrUpdateDto);
 

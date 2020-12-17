@@ -57,12 +57,10 @@ namespace WebService.Middleware
                 if (claim != null)
                 {
                     int.TryParse(claim.Value.ToString(), out var id);
-                    context.Items["User"] = _dataService.GetUser(id);
+                    context.Items["user"] = _dataService.GetUser(id);
                 }
             }
             catch {}
-
-            await _next(context);
         }
     }
 }

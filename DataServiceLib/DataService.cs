@@ -56,6 +56,7 @@ namespace DataServiceLib.Framework
         public Users CreateUser(string email, string username, string password, string salt)
         {
             var conn = new Raw12Context();
+            
           
             var newUser = new Users {
                 user_id = conn.Users.Max(x => x.user_id) + 1,
@@ -65,8 +66,8 @@ namespace DataServiceLib.Framework
                 salt = salt
 
         };
-            
             conn.Users.Add(newUser);
+            conn.SaveChanges();
             return newUser;
         }
 
