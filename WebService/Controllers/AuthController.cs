@@ -71,6 +71,7 @@ namespace AuthController.Controllers
                 throw new ArgumentException("No secret");
             }
 
+            // Problem seems to be around here:
             var password = PasswordService.HashPassword(dto.Password, user.salt, pwdSize);
 
             if (password != user.password)
