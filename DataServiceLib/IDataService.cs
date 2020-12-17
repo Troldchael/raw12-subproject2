@@ -26,7 +26,7 @@ namespace DataServiceLib
 
         Users GetUser(int id);
 
-        Users GetUser(String username);
+        Users GetUser(String userName);
 
         IList<Users> GetUserInfo(int page, int pageSize);
        
